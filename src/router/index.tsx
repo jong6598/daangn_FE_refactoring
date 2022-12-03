@@ -1,12 +1,14 @@
 import { Routes, Route } from 'react-router';
 import { isValidArray } from '../utils/ArrayUtils';
-import SignUp from '../pages/SignUp';
 import { ROUTE_PATH } from './routePath';
 import SignIn from '../pages/SignIn';
+import Intro from '../pages/Intro';
+import SignUp from '../pages/SignUp';
 
 const routes = [
-	{ id: 1, path: ROUTE_PATH.SIGNUP, element: <SignUp /> },
-	{ id: 2, path: ROUTE_PATH.SIGNIN, element: <SignIn /> },
+	{ id: 1, path: ROUTE_PATH.INTRO, element: <Intro /> },
+	{ id: 2, path: ROUTE_PATH.SIGNUP, element: <SignUp /> },
+	{ id: 3, path: ROUTE_PATH.SIGNIN, element: <SignIn /> },
 ];
 
 const Router = () => {
