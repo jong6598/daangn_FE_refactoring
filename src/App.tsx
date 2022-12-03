@@ -1,4 +1,6 @@
+import Router from './router/index';
+
 const App = () => {
-	return <div>당근마켓</div>;
+	return <Router />;
 };
 export default App;
