@@ -1,41 +1,69 @@
-import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useForm from '../../hooks/useForm';
+import { signup } from '../../core/apis/auth';
+import validateSign from '../../utils/validateSign';
 import { SignUpWrap, InputBox, Error, BtnContainer } from './styled';
 
 const SignUp = () => {
-	const idRef = useRef<HTMLInputElement>(null);
-	const nickNameRef = useRef<HTMLInputElement>(null);
-	const passwordRef = useRef<HTMLInputElement>(null);
-	const passwordCheckRef = useRef<HTMLInputElement>(null);
 	const navigate = useNavigate();
+	const { values, errors, handleChange, handleSubmit } = useForm({
+		initialValues: { username: '', password: '', nickname: '', confirmPassword: '' },
+		onSubmit: async (values: object) => {
+			await signup(values);
+			alert('회원가입 완료! 로그인 페이지로 이동합니다.');
+			navigate('/singin');
+		},
+		validateSign,
+	});
 
 	return (
 		<SignUpWrap>
 			<img src="/image/logo.png" alt="logo" />
 			<h1>회원가입</h1>
-			<form>
+			<form onSubmit={handleSubmit}>
 				<InputBox>
 					<label>ID</label>
-					<input type="text" placeholder="아이디를 입력해 주세요 (4자 이상)" ref={idRef} />
-					{!idRef.current?.value && <Error>* 아이디는 필수값 입니다. </Error>}
-					{idRef.current?.value && idRef.current?.value.length < 4 && <Error>* 아이디는 4자 이상입니다</Error>}
+					<input
+						type="text"
+						name="username"
+						value={values.username}
+						onChange={handleChange}
+						placeholder="아이디를 입력해 주세요 (4자 이상)"
+					/>
+					{errors.username && <Error>{errors.username} </Error>}
 				</InputBox>
 				<InputBox>
 					<label>NICKNAME</label>
-					<input type="text" placeholder="닉네임을 입력해 주세요 (10자 이하)" ref={nickNameRef} />
-					{!nickNameRef.current?.value && <Error>* 닉네임은 필수값 입니다. </Error>}
-					{nickNameRef.current?.value && nickNameRef.current?.value.length > 10 && <Error>* 닉네임은 10자 이하입니다</Error>}
+					<input
+						type="text"
+						name="nickname"
+						value={values.nickname}
+						placeholder="닉네임을 입력해 주세요 (10자 이하)"
+						onChange={handleChange}
+					/>
+					{errors.nickname && <Error>{errors.nickname}</Error>}
 				</InputBox>
 				<InputBox>
 					<label>PASSWORD</label>
-					<input type="password" placeholder="비밀번호를 입력해 주세요 (6자 이상)" ref={passwordRef} />
-					{!passwordRef.current?.value && <Error>* 비밀번호는 필수값 입니다. </Error>}
-					{passwordRef.current?.value && passwordRef.current?.value.length < 6 && <Error>* 비밀번호는 6자 이하입니다</Error>}
+					<input
+						type="password"
+						name="password"
+						value={values.password}
+						placeholder="비밀번호를 입력해 주세요 (6자 이상)"
+						onChange={handleChange}
+					/>
+					{errors.password && <Error>{errors.password}</Error>}
 				</InputBox>
 				<InputBox>
 					<label>PASSWORD CONFIRMATION</label>
-					<input type="password" placeholder="비밀번호를 확인해주세요" ref={passwordCheckRef} />
-					{passwordCheckRef.current?.value !== passwordRef.current?.value && <Error>비밀번호가 일치하지 않습니다.</Error>}
+					<input
+						type="password"
+						name="confirmPassword"
+						value={values.confirmPassword}
+						placeholder="비밀번호를 확인해주세요"
+						onChange={handleChange}
+					/>
+					{values.confirmPassword !== values.password && <Error>비밀번호가 일치하지 않습니다.</Error>}
 				</InputBox>
 				<BtnContainer>
 					<button className="joinBtn" type="submit">
