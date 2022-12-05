@@ -65,3 +65,9 @@ export const SignInWrap = styled.form`
 		}
 	}
 `;
+
+export const Error = styled.p`
+	margin-top: 0.5rem;
+	font-size: 0.8rem;
+	color: #e78111;
+`;

@@ -52,6 +52,7 @@ export const Error = styled.p`
 
 export const BtnContainer = styled.div`
 	display: flex;
+	margin-top: 0.8rem;
 	.joinBtn {
 		cursor: pointer;
 		padding: 0.7rem 1rem;
