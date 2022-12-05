@@ -11,18 +11,22 @@ const createAxiosInstance = () => {
 const axiosInstance = createAxiosInstance();
 
 export default async function requester<Payload>(option: AxiosRequestConfig) {
-	const access_Token = '';
-	//FIXME: 실제로는 로그인 후 저장된 로컬스토리지의 변수명을 가져와야함.
-	const accessToken = localStorage.getItem(access_Token) as string;
+	const accessToken = localStorage.getItem('TOKEN') as string;
 	const response: AxiosResponse<Payload> = await axiosInstance(
 		accessToken
 			? {
 					headers: {
 						Authorization: `Bearer ${accessToken}`,
+						'content-type': 'application/json;charset=UTF-8',
+						accept: 'application/json,',
 					},
 					...option,
 			  }
 			: {
+					headers: {
+						'content-type': 'application/json;charset=UTF-8',
+						accept: 'application/json,',
+					},
 					...option,
 			  },
 	);
