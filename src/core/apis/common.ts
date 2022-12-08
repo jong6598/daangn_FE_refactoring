@@ -10,4 +10,8 @@ export const API_PATH = {
 		signin: '/api/login',
 		signup: '/api/signup',
 	},
+	post: {
+		postlist: 'api/posts',
+		post: 'api/post',
+	},
 } as const;

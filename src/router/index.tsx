@@ -4,11 +4,13 @@ import { ROUTE_PATH } from './routePath';
 import SignIn from '../pages/SignIn';
 import Intro from '../pages/Intro';
 import SignUp from '../pages/SignUp';
+import PostList from '../pages/PostList';
 
 const routes = [
 	{ id: 1, path: ROUTE_PATH.INTRO, element: <Intro /> },
 	{ id: 2, path: ROUTE_PATH.SIGNUP, element: <SignUp /> },
 	{ id: 3, path: ROUTE_PATH.SIGNIN, element: <SignIn /> },
+	{ id: 4, path: ROUTE_PATH.POSTLIST, element: <PostList /> },
 ];
 
 const Router = () => {

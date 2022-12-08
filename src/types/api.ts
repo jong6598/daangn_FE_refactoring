@@ -4,3 +4,10 @@ export type SignInResponseDTO = {
 	username: string;
 	nickname: string;
 };
+
+export type PostListResponseDto = {
+	last: number;
+	list: {
+		content: {};
+	};
+};
