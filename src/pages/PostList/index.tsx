@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PostListItem from '../../components/feature/PostListItem';
 import Layout from '../../components/layout';
 import DropDown from '../../components/shared/DropDown';
 import SearchInput from '../../components/shared/SearchInput';
@@ -26,7 +27,7 @@ const PostList = () => {
 		<Layout>
 			<PostListWrap>
 				<div className="headerDiv">
-					<div>
+					<div className="filterDiv">
 						<DropDown dropdownTarget="area" options={dropDownTable.AreaOptions} onDropdownChange={handleDropdownFilterChange} />
 						<DropDown
 							dropdownTarget="category"
@@ -35,6 +36,12 @@ const PostList = () => {
 						/>
 					</div>
 					<SearchInput onSearchByKeyword={handleSearchByKeyword} />
+				</div>
+				<div className="listDiv">
+					<PostListItem />
+					<PostListItem />
+					<PostListItem />
+					<PostListItem />
 				</div>
 			</PostListWrap>
 		</Layout>
