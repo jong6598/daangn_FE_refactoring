@@ -1,5 +1,6 @@
 import { getPostList, getPostListByKeyword } from '../core/apis/post';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { queryKeys } from '../constants/queryKeys';
 
 type Props = {
 	area: string;
@@ -22,15 +23,19 @@ const usePost = (searchKeyword: string, postFilterObj: Props) => {
 	};
 
 	const {
-		data: postsListData,
+		data: postListData,
 		fetchNextPage,
 		isFetchingNextPage,
 		refetch,
-	} = useInfiniteQuery(['postList', postFilterObj.category, postFilterObj.area], ({ pageParam = 0 }) => getPosts(pageParam), {
-		getNextPageParam: (lastPage) => (!lastPage.last ? lastPage.nextPage : undefined),
-	});
+	} = useInfiniteQuery(
+		[queryKeys.postList, postFilterObj.category, postFilterObj.area],
+		({ pageParam = 0 }) => getPosts(pageParam),
+		{
+			getNextPageParam: (lastPage) => (!lastPage.last ? lastPage.nextPage : undefined),
+		},
+	);
 
-	return { postsListData, fetchNextPage, isFetchingNextPage, refetch };
+	return { postListData, fetchNextPage, isFetchingNextPage, refetch };
 };
 
 export default usePost;
