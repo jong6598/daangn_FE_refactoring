@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FooterWrap } from './styled';
 import { HiHome, HiOutlineHome, HiChatAlt2, HiOutlineChatAlt2 } from 'react-icons/hi';
 import { RiUser3Fill, RiUser3Line } from 'react-icons/ri';
 
 const Footer = () => {
 	const navigate = useNavigate();
-	const [currentPage, setCurrentPage] = useState('home');
+	const location = useLocation();
+	const currentPage = location.pathname;
 
 	return (
 		<FooterWrap>
@@ -14,10 +14,9 @@ const Footer = () => {
 				<button
 					onClick={() => {
 						navigate('/home');
-						setCurrentPage('home');
 					}}
 				>
-					{currentPage === 'home' ? <HiHome /> : <HiOutlineHome />}
+					{currentPage === '/home' ? <HiHome /> : <HiOutlineHome />}
 				</button>
 				<p>홈</p>
 			</div>
@@ -25,10 +24,9 @@ const Footer = () => {
 				<button
 					onClick={() => {
 						navigate('/mychatroom');
-						setCurrentPage('mychatroom');
 					}}
 				>
-					{currentPage === 'mychatroom' ? <HiChatAlt2 /> : <HiOutlineChatAlt2 />}
+					{currentPage === '/mychatroom' ? <HiChatAlt2 /> : <HiOutlineChatAlt2 />}
 				</button>
 				<p>채팅</p>
 			</div>
@@ -36,10 +34,9 @@ const Footer = () => {
 				<button
 					onClick={() => {
 						navigate('/mypage');
-						setCurrentPage('mypage');
 					}}
 				>
-					{currentPage === 'mypage' ? <RiUser3Fill /> : <RiUser3Line />}
+					{currentPage === '/mypage' ? <RiUser3Fill /> : <RiUser3Line />}
 				</button>
 				<p>나의 당근</p>
 			</div>
