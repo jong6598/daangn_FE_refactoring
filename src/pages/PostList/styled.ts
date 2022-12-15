@@ -36,4 +36,19 @@ export const PostListWrap = styled.div`
 		top: 7rem;
 		overflow-y: auto;
 	}
+	.postAddDiv {
+		position: fixed;
+		bottom: 20%;
+		right: 30%;
+		border-radius: 50%;
+		cursor: pointer;
+		svg {
+			width: 6rem;
+			height: 6rem;
+			border-radius: 50%;
+			font-size: 6rem;
+			color: #e78111;
+			background: transparent;
+		}
+	}
 `;
