@@ -27,3 +27,29 @@ export const getPostListByKeyword = async (search: string, pageParam: number) =>
 
 	return payload;
 };
+
+export const postNewPost = async (postValue: object) => {
+	const {
+		post: { post },
+	} = API_PATH;
+
+	const { payload } = await requester({
+		method: httpMethod.POST,
+		url: `${post}`,
+	});
+
+	return payload;
+};
+
+export const editPost = async (postValue: object, postId: string) => {
+	const {
+		post: { post },
+	} = API_PATH;
+
+	const { payload } = await requester({
+		method: httpMethod.PUT,
+		url: `${post}/${postId}`,
+	});
+
+	return payload;
+};

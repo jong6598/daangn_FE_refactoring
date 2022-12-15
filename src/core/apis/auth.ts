@@ -21,10 +21,23 @@ export const signup = async (values: object) => {
 		auth: { signup },
 	} = API_PATH;
 
-	const { payload } = await requester<SignInResponseDTO>({
+	const { payload } = await requester({
 		method: httpMethod.POST,
 		url: `${signup}`,
 		data: values,
+	});
+
+	return payload;
+};
+
+export const logout = async () => {
+	const {
+		auth: { logout },
+	} = API_PATH;
+
+	const { payload } = await requester({
+		method: httpMethod.POST,
+		url: `${logout}`,
 	});
 
 	return payload;
