@@ -1,7 +1,8 @@
 import { PostListItemWrap } from './styled';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { PostDetailResponseDto } from '../../../types/api';
 
-const PostListItem = () => {
+const PostListItem = ({ post }: PostDetailResponseDto) => {
 	return (
 		<PostListItemWrap>
 			<div className="postDiv">
@@ -9,14 +10,16 @@ const PostListItem = () => {
 					<img src="/image/logo.png" alt="postimage" />
 				</div>
 				<div className="infoDiv">
-					<p>아이폰</p>
-					<p className="area">대구 달성군 · 1시간 전</p>
-					<p>100,0000원 </p>
+					<p>{post.title}</p>
+					<p className="area">
+						{post.area} · {post.after}
+					</p>
+					<p>{post.price}원</p>
 				</div>
 			</div>
 			<div className="likeDiv">
 				<AiOutlineHeart />
-				<p>10</p>
+				<p>{post.likeCount}</p>
 			</div>
 		</PostListItemWrap>
 	);
