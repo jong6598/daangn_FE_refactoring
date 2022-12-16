@@ -1,13 +1,13 @@
 import { API_PATH, httpMethod } from './common';
 import requester from './requester';
-import { SignInResponseDTO } from '../../types/api';
+import { SignInResponseDto } from '../../types/api';
 
 export const signin = async (values: object) => {
 	const {
 		auth: { signin },
 	} = API_PATH;
 
-	const { payload } = await requester<SignInResponseDTO>({
+	const { payload } = await requester<SignInResponseDto>({
 		method: httpMethod.POST,
 		url: `${signin}`,
 		data: values,

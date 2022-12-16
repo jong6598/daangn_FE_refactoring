@@ -13,7 +13,7 @@ export const API_PATH = {
 		logout: '/api/logout',
 	},
 	post: {
-		postlist: 'api/posts',
-		post: 'api/post',
+		postlist: '/api/posts',
+		post: '/api/post',
 	},
 } as const;
