@@ -15,7 +15,7 @@ export const getPostList = async (category: string, area: string, pageParam: num
 	return payload;
 };
 
-export const getPostListByKeyword = async (search: string, pageParam: number) => {
+export const extractPostListByKeyword = async (search: string, pageParam: number) => {
 	const {
 		post: { postlist },
 	} = API_PATH;
@@ -36,6 +36,7 @@ export const postNewPost = async (postValue: object) => {
 	const { payload } = await requester({
 		method: httpMethod.POST,
 		url: `${post}`,
+		data: postValue,
 	});
 
 	return payload;
@@ -49,6 +50,7 @@ export const editPost = async (postValue: object, postId: string) => {
 	const { payload } = await requester({
 		method: httpMethod.PUT,
 		url: `${post}/${postId}`,
+		data: postValue,
 	});
 
 	return payload;
