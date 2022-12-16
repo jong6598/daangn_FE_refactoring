@@ -4,14 +4,25 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import App from './App';
 import { GlobalStyle, theme } from './styles';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			retry: 1,
+		},
+	},
+});
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<ThemeProvider theme={theme}>
-				<GlobalStyle />
-				<App />
-			</ThemeProvider>
+			<QueryClientProvider client={queryClient}>
+				<ThemeProvider theme={theme}>
+					<GlobalStyle />
+					<App />
+				</ThemeProvider>
+			</QueryClientProvider>
 		</BrowserRouter>
 	</React.StrictMode>,
 );

@@ -372,6 +372,19 @@
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.0.4.tgz#cbfbec6735711e7c2fc93b9b40adf70ef5a39990"
   integrity sha512-gTL8H5USTAKOyVA4xczzDJnC3HMssdFa3tRlwBicXynx9XfiXwneHnYQogwSKpdCkjXISrEKSTtX62rLpNEVQg==
 
+"@tanstack/query-core@4.19.1":
+  version "4.19.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.19.1.tgz#2e92d9e8a50884eb231c5beb4386e131ebe34306"
+  integrity sha512-Zp0aIose5C8skBzqbVFGk9HJsPtUhRVDVNWIqVzFbGQQgYSeLZMd3Sdb4+EnA5wl1J7X+bre2PJGnQg9x/zHOA==
+
+"@tanstack/react-query@^4.19.1":
+  version "4.19.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.19.1.tgz#43356dd537127e76d75f5a2769eb23dafd9a3690"
+  integrity sha512-5dvHvmc0vrWI03AJugzvKfirxCyCLe+qawrWFCXdu8t7dklIhJ7D5ZhgTypv7mMtIpdHPcECtCiT/+V74wCn2A==
+  dependencies:
+    "@tanstack/query-core" "4.19.1"
+    use-sync-external-store "^1.2.0"
+
 "@types/hoist-non-react-statics@*":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
@@ -2280,6 +2293,16 @@ react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
+react-icons@^4.7.1:
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.7.1.tgz#0f4b25a5694e6972677cb189d2a72eabea7a8345"
+  integrity sha512-yHd3oKGMgm7zxo3EA7H2n7vxSoiGmHk5t6Ou4bXsfcgWyhfDKMpyKfhHR6Bjnn63c+YXBLBPUql9H4wPJM6sXw==
+
+react-intersection-observer@^9.4.1:
+  version "9.4.1"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-9.4.1.tgz#4ccb21e16acd0b9cf5b28d275af7055bef878f6b"
+  integrity sha512-IXpIsPe6BleFOEHKzKh5UjwRUaz/JYS0lT/HPsupWEQou2hDqjhLMStc5zyE3eQVT4Fk3FufM8Fw33qW1uyeiw==
+
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -2714,6 +2737,11 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+use-sync-external-store@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
+  integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
 
 vite@^3.2.3:
   version "3.2.4"
