@@ -1,16 +1,22 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
 import { logout } from '../../core/apis/auth';
 import Layout from '../../components/layout';
 import { MypageWrap } from './styled';
 import { IoIosPaper } from 'react-icons/io';
 import { AiFillHeart } from 'react-icons/ai';
 import { FaCarrot } from 'react-icons/fa';
+import useMyPostList from '../../hooks/useMyPostList';
+import { PostDetailData } from '../../types/api';
+import PostListItem from '../../components/feature/PostListItem';
 
 const Mypage = () => {
-	const nickName = JSON.parse(localStorage.getItem('userInfo')!).username;
-	const [filter, setFilter] = useState('sale');
 	const navigate = useNavigate();
+	const { ref, inView } = useInView();
+	const [filter, setFilter] = useState('sale');
+	const nickName = JSON.parse(localStorage.getItem('userInfo')!).username;
+	const { myPostListData, fetchNextPage, isFetchingNextPage } = useMyPostList(filter);
 
 	const handleLogout = async () => {
 		await logout;
@@ -20,8 +26,10 @@ const Mypage = () => {
 	};
 
 	useEffect(() => {
-		console.log(filter);
-	}, [filter]);
+		if (inView) {
+			fetchNextPage();
+		}
+	}, [inView]);
 
 	return (
 		<Layout>
@@ -50,7 +58,26 @@ const Mypage = () => {
 						<p>관심목록</p>
 					</button>
 				</div>
-				<div className="contentDiv"></div>
+				{myPostListData &&
+					myPostListData.pages.map((page: any, idx: number) => {
+						return (
+							<React.Fragment key={idx}>
+								{page.data.map((post: PostDetailData) => (
+									<div
+										className="contentDiv"
+										key={post.id}
+										style={{ cursor: 'pointer' }}
+										onClick={() => {
+											navigate(`/post/${post.id}`);
+										}}
+									>
+										<PostListItem post={post} />
+									</div>
+								))}
+							</React.Fragment>
+						);
+					})}
+				{isFetchingNextPage ? <div>로딩중...</div> : <div ref={ref} />}
 			</MypageWrap>
 		</Layout>
 	);
