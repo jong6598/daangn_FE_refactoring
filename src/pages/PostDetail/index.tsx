@@ -10,7 +10,7 @@ const PostDetail = () => {
 	const navigate = useNavigate();
 	const params = useParams();
 	const loginUserName = JSON.parse(localStorage.getItem('userInfo')!).username;
-	const { postInfo, toggleLike, deleteContent } = usePostDetail(params.postId!);
+	const { postInfo, onToggleLike, onDelete } = usePostDetail(params.postId!);
 
 	return (
 		<Layout>
@@ -26,7 +26,7 @@ const PostDetail = () => {
 									<button onClick={() => navigate(`/post/${params.postId}`)}>
 										<AiOutlineEdit />
 									</button>
-									<button onClick={deleteContent}>
+									<button onClick={() => onToggleLike()}>
 										<AiOutlineDelete />
 									</button>
 								</div>
@@ -40,7 +40,7 @@ const PostDetail = () => {
 									<p>작성자: {postInfo.nickname}</p>
 									<p>지역: {postInfo.area}</p>
 								</div>
-								<button onClick={toggleLike}>
+								<button onClick={() => onDelete()}>
 									{postInfo.isLiked ? (
 										<img src="/image/heart.png" alt="heartbutton" />
 									) : (

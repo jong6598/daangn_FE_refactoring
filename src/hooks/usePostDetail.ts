@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '../constants/queryKeys';
 import { getPostDetail, likePost, unlikePost, deletePost } from '../core/apis/post';
 
 const usePostDetail = (postId: string) => {
 	const navigate = useNavigate();
+	const queryClient = useQueryClient();
 	const accessToken = localStorage.getItem('TOKEN');
 	const loginUserName = JSON.parse(localStorage.getItem('userInfo')!).username;
 
@@ -25,6 +26,16 @@ const usePostDetail = (postId: string) => {
 		}
 	};
 
+	const { mutate: onToggleLike } = useMutation(toggleLike, {
+		onSuccess: () => {
+			queryClient.invalidateQueries([queryKeys.postDetail], {
+				refetchType: 'all',
+			});
+			queryClient.invalidateQueries([queryKeys.postList], { refetchType: 'all' });
+		},
+		onError: () => {},
+	});
+
 	const deleteContent = async () => {
 		const result = window.confirm('게시글을 삭제하시겠습니까?');
 		if (result) {
@@ -38,7 +49,17 @@ const usePostDetail = (postId: string) => {
 		}
 	};
 
-	return { postInfo, toggleLike, deleteContent };
+	const { mutate: onDelete } = useMutation(deleteContent, {
+		onSuccess: () => {
+			queryClient.invalidateQueries([queryKeys.postList], {
+				refetchType: 'all',
+			});
+			return navigate('/home');
+		},
+		onError: () => {},
+	});
+
+	return { postInfo, onToggleLike, onDelete };
 };
 
 export default usePostDetail;
