@@ -14,7 +14,7 @@ const usePostDetail = (postId: string) => {
 		return res;
 	};
 
-	const postInfo = useQuery([queryKeys.postDetail], extractPostDetail, {
+	const postInfo = useQuery([queryKeys.postDetail, postId], extractPostDetail, {
 		refetchOnWindowFocus: false,
 	}).data;
 
