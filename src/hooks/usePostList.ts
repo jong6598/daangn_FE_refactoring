@@ -1,4 +1,4 @@
-import { getPostList, extractPostListByKeyword } from '../core/apis/post';
+import { fetchPostList, extractPostListByKeyword } from '../core/apis/post';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { queryKeys } from '../constants/queryKeys';
 
@@ -15,7 +15,7 @@ const usePostList = (searchKeyword: string, postFilterObj: Props) => {
 			const last = payload.pageable.last;
 			return { data, nextPage: pageParam + 1, last };
 		} else {
-			const res = await getPostList(postFilterObj.category, postFilterObj.area, pageParam);
+			const res = await fetchPostList(postFilterObj.category, postFilterObj.area, pageParam);
 			const data = res.list.content;
 			const last = res.pageable.last;
 			return { data, nextPage: pageParam + 1, last };
