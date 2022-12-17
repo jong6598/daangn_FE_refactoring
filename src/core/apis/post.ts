@@ -8,7 +8,7 @@ import {
 	DeletePostResponseDto,
 } from '../../types/api';
 
-export const getPostList = async (category: string, area: string, pageParam: number) => {
+export const fetchPostList = async (category: string, area: string, pageParam: number) => {
 	const {
 		post: { postlist },
 	} = API_PATH;
@@ -109,6 +109,19 @@ export const deletePost = async (postId: string) => {
 	const { payload } = await requester<DeletePostResponseDto>({
 		method: httpMethod.DELETE,
 		url: `${post}/${postId}`,
+	});
+
+	return payload;
+};
+
+export const fetchMyPostList = async (filter: string, pageParam: number) => {
+	const {
+		post: { mypost },
+	} = API_PATH;
+
+	const { payload } = await requester<PostListResponseDto>({
+		method: httpMethod.GET,
+		url: `${mypost}?filter=${filter}&page=${pageParam}&size=6`,
 	});
 
 	return payload;

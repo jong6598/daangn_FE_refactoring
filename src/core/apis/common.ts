@@ -16,5 +16,6 @@ export const API_PATH = {
 		postlist: '/api/posts',
 		post: '/api/post',
 		like: '/api/like',
+		mypost: '/api/mypost',
 	},
 } as const;
