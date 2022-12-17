@@ -1,5 +1,8 @@
 ## 당신 근처의 당근마켓
 
+<img width="1436" alt="스크린샷 2022-12-18 오전 4 46 30" src="https://user-images.githubusercontent.com/108744804/208263650-3a5e4435-27a6-4918-a829-572f08ef6ad3.png">
+
+
 ## 프로젝트 설명
 
 > [당근마켓](https://github.com/daangnCloneProject/daangn_FE) 기존 당근마켓 클론코딩 프로젝트를 vite & typeScript 환경으로 마이그레이션 
