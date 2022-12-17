@@ -67,3 +67,8 @@ export type PostDetailData = {
 	nickname: string;
 	isLiked: boolean;
 };
+
+export type DeletePostResponseDto = {
+	resonse: boolean;
+	message: string;
+};
