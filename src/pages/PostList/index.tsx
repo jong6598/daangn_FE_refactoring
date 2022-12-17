@@ -6,7 +6,7 @@ import PostListItem from '../../components/feature/PostListItem';
 import DropDown from '../../components/shared/DropDown';
 import SearchInput from '../../components/shared/SearchInput';
 import { dropDownTable } from '../../constants/dropDown';
-import usePost from '../../hooks/usePost';
+import usePostList from '../../hooks/usePostList';
 import { PostListWrap } from './styled';
 import { FiPlusCircle } from 'react-icons/fi';
 import { PostDetailData } from '../../types/api';
@@ -19,7 +19,7 @@ const PostList = () => {
 		area: 'ALL',
 		category: 'ALL',
 	});
-	const { postListData, fetchNextPage, isFetchingNextPage } = usePost(searchKeyword, postFilterObj);
+	const { postListData, fetchNextPage, isFetchingNextPage } = usePostList(searchKeyword, postFilterObj);
 
 	useEffect(() => {
 		if (inView) {
