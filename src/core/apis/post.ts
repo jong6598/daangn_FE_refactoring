@@ -1,6 +1,6 @@
 import requester from './requester';
 import { API_PATH, httpMethod } from './common';
-import { PostListResponseDto } from '../../types/api';
+import { PostListResponseDto, EditPostRespnseDto, LikeRespnseDto, PostDetailResponseDto, DeletePostDto } from '../../types/api';
 
 export const getPostList = async (category: string, area: string, pageParam: number) => {
 	const {
@@ -47,10 +47,62 @@ export const editPost = async (postValue: object, postId: string) => {
 		post: { post },
 	} = API_PATH;
 
-	const { payload } = await requester({
+	const { payload } = await requester<EditPostRespnseDto>({
 		method: httpMethod.PUT,
 		url: `${post}/${postId}`,
 		data: postValue,
+	});
+
+	return payload;
+};
+
+export const getPostDetail = async (postId: string) => {
+	const {
+		post: { post },
+	} = API_PATH;
+
+	const { payload } = await requester<PostDetailResponseDto>({
+		method: httpMethod.GET,
+		url: `${post}/${postId}`,
+	});
+
+	return payload.post;
+};
+
+export const likePost = async (postId: string) => {
+	const {
+		post: { like },
+	} = API_PATH;
+
+	const { payload } = await requester<LikeRespnseDto>({
+		method: httpMethod.POST,
+		url: `${like}/${postId}`,
+	});
+
+	return payload;
+};
+
+export const unlikePost = async (postId: string) => {
+	const {
+		post: { like },
+	} = API_PATH;
+
+	const { payload } = await requester<LikeRespnseDto>({
+		method: httpMethod.DELETE,
+		url: `${like}/${postId}`,
+	});
+
+	return payload;
+};
+
+export const deletePost = async (postId: string) => {
+	const {
+		post: { post },
+	} = API_PATH;
+
+	const { payload } = await requester<DeletePostDto>({
+		method: httpMethod.DELETE,
+		url: `${post}/${postId}`,
 	});
 
 	return payload;
