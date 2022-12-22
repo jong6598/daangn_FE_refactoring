@@ -5,6 +5,7 @@ import { FaCarrot } from 'react-icons/fa';
 import usePostDetail from '../../hooks/usePostDetail';
 import Layout from '../../components/layout';
 import { PostDetailWrap } from './styled';
+import { numberWithCommasConverter } from '../../utils/numberUtils';
 
 const PostDetail = () => {
 	const navigate = useNavigate();
@@ -26,7 +27,7 @@ const PostDetail = () => {
 									<button onClick={() => navigate(`/post/${params.postId}`)}>
 										<AiOutlineEdit />
 									</button>
-									<button onClick={() => onToggleLike()}>
+									<button onClick={() => onDelete()}>
 										<AiOutlineDelete />
 									</button>
 								</div>
@@ -40,20 +41,22 @@ const PostDetail = () => {
 									<p>작성자: {postInfo.nickname}</p>
 									<p>지역: {postInfo.area}</p>
 								</div>
-								<button onClick={() => onDelete()}>
-									{postInfo.isLiked ? (
-										<img src="/image/heart.png" alt="heartbutton" />
-									) : (
-										<img src="/image/emptyheart.png" alt="emptyheartbutton" />
-									)}
-								</button>
+								{postInfo.nickname !== loginUserName && (
+									<button onClick={() => onToggleLike()}>
+										{postInfo.isLiked ? (
+											<img src="/image/heart.png" alt="heartbutton" />
+										) : (
+											<img src="/image/emptyheart.png" alt="emptyheartbutton" />
+										)}
+									</button>
+								)}
 							</div>
 							<div className="contentDiv">
 								<p className="title"> {postInfo.title}</p>
 								<p className="category">
-									{postInfo.category} · {postInfo.category}
+									{postInfo.category} · {postInfo.after}
 								</p>
-								<p> {postInfo.price}</p>
+								<p> {numberWithCommasConverter(String(postInfo.price))}원</p>
 								<p> {postInfo.content}</p>
 							</div>
 						</div>

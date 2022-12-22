@@ -1,12 +1,14 @@
 import { PostListItemWrap } from './styled';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { PostDetailResponseDto } from '../../../types/api';
+import { numberWithCommasConverter } from '../../../utils/numberUtils';
 
 const PostListItem = ({ post }: PostDetailResponseDto) => {
 	return (
 		<PostListItemWrap>
 			<div className="postDiv">
 				<div className="imgDiv">
+					{/* {post.imageUrl ? <img src={post.imageUrl} alt="postImg" /> : <img src="/image/logo.png" alt="alternativeImg" />} */}
 					<img src="/image/logo.png" alt="postimage" />
 				</div>
 				<div className="infoDiv">
@@ -14,7 +16,7 @@ const PostListItem = ({ post }: PostDetailResponseDto) => {
 					<p className="area">
 						{post.area} · {post.after}
 					</p>
-					<p>{post.price}원</p>
+					<p>{numberWithCommasConverter(String(post.price))} 원</p>
 				</div>
 			</div>
 			<div className="likeDiv">
