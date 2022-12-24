@@ -442,7 +442,7 @@ https://www.youtube.com/watch?v=buMKHvXKEAY
 
 ## 추가 테스크
 
-1.  - [ ] 500 server error 해결 이후 로직 확인 및 수정
+1.  - [x] 500 server error 해결 이후 로직 확인 및 수정
 <img width="719" alt="스크린샷 2022-12-16 오후 9 25 52" src="https://user-images.githubusercontent.com/108744804/208263158-a6f093b6-dc2a-41ae-9a3b-8e752e9e4d39.png">
 
 2.  - [ ] errorBoundary & suspense 설정을 통한 error, loding 상태 핸들링
