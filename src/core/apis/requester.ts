@@ -16,7 +16,7 @@ export default async function requester<Payload>(option: AxiosRequestConfig) {
 		accessToken
 			? {
 					headers: {
-						Authorization: `Bearer ${accessToken}`,
+						Authorization: `${accessToken}`,
 						'content-type': 'application/json;charset=UTF-8',
 						accept: 'application/json,',
 					},
