@@ -9,16 +9,16 @@ type Props = {
 
 const usePostList = (searchKeyword: string, postFilterObj: Props) => {
 	const getPosts = async (pageParam: number) => {
-		if (searchKeyword !== '') {
+		if (searchKeyword === '') {
+			const payload = await fetchPostList(postFilterObj.category, postFilterObj.area, pageParam);
+			const data = payload.list.content;
+			const last = payload.list.last;
+			return { data, last, nextPage: pageParam + 1 };
+		} else {
 			const payload = await extractPostListByKeyword(searchKeyword, pageParam);
 			const data = payload.list.content;
-			const last = payload.pageable.last;
-			return { data, nextPage: pageParam + 1, last };
-		} else {
-			const res = await fetchPostList(postFilterObj.category, postFilterObj.area, pageParam);
-			const data = res.list.content;
-			const last = res.pageable.last;
-			return { data, nextPage: pageParam + 1, last };
+			const last = payload.list.last;
+			return { data, last, nextPage: pageParam + 1 };
 		}
 	};
 
@@ -27,10 +27,10 @@ const usePostList = (searchKeyword: string, postFilterObj: Props) => {
 		fetchNextPage,
 		isFetchingNextPage,
 	} = useInfiniteQuery(
-		[queryKeys.postList, postFilterObj.category, postFilterObj.area],
+		[queryKeys.postList, postFilterObj.area, postFilterObj.category, searchKeyword],
 		({ pageParam = 0 }) => getPosts(pageParam),
 		{
-			getNextPageParam: (lastPage) => (!lastPage.last ? lastPage.nextPage : undefined),
+			getNextPageParam: (postListData) => (!postListData.last ? postListData.nextPage : undefined),
 		},
 	);
 

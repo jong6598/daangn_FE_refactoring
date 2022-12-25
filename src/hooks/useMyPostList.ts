@@ -5,8 +5,8 @@ import { fetchMyPostList } from '../core/apis/post';
 const useMyPostList = (filter: string) => {
 	const getMyPostList = async (pageParam: number) => {
 		const payload = await fetchMyPostList(filter, pageParam);
-		let data = payload.list.content;
-		let last = payload.pageable.last;
+		const data = payload.list.content;
+		const last = payload.list.last;
 		return { data, last, nextPage: pageParam + 1 };
 	};
 
@@ -15,7 +15,7 @@ const useMyPostList = (filter: string) => {
 		fetchNextPage,
 		isFetchingNextPage,
 	} = useInfiniteQuery([queryKeys.myPostList, filter], ({ pageParam = 0 }) => getMyPostList(pageParam), {
-		getNextPageParam: (LastPage) => (!LastPage.last ? LastPage.nextPage : undefined),
+		getNextPageParam: (myPostListData) => (!myPostListData.last ? myPostListData.nextPage : undefined),
 	});
 
 	return { myPostListData, fetchNextPage, isFetchingNextPage };
