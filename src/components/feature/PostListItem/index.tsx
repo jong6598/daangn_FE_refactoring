@@ -1,14 +1,16 @@
-import { PostListItemWrap } from './styled';
 import { AiOutlineHeart } from 'react-icons/ai';
-import { PostDetailResponseDto } from '../../../types/api';
-import { numberWithCommasConverter } from '../../../utils/numberUtils';
+
+import { PostDetailResponseDto } from '@src/types/api';
+import { numberWithCommasConverter } from '@src/utils/numberUtils';
+
+import { PostListItemWrap } from './styled';
 
 const PostListItem = ({ post }: PostDetailResponseDto) => {
 	return (
 		<PostListItemWrap>
 			<div className="postDiv">
 				<div className="imgDiv">
-					<img src="/image/logo.png" alt="postimage" />
+					<img src="/src/assets/image/logo.png" alt="postimage" />
 				</div>
 				<div className="infoDiv">
 					<p>{post.title}</p>

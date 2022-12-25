@@ -1,6 +1,6 @@
-import { API_PATH, httpMethod } from './common';
-import requester from './requester';
-import { SignInResponseDto } from '../../types/api';
+import { API_PATH, httpMethod } from '@src/core/apis/common';
+import requester from '@src/core/apis/requester';
+import { SignInResponseDto } from '@src/types/api';
 
 export const signin = async (values: object) => {
 	const {

@@ -1,7 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { queryKeys } from '../constants/queryKeys';
-import { postNewPost, editPost } from '../core/apis/post';
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { queryKeys } from '@src/constants/queryKeys';
+import { postNewPost, editPost } from '@src/core/apis/post';
 
 type Props = {
 	isEditingMode: boolean;

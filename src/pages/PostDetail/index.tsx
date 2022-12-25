@@ -1,11 +1,14 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
 import { AiOutlineHome, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import { FaCarrot } from 'react-icons/fa';
-import usePostDetail from '../../hooks/usePostDetail';
-import Layout from '../../components/layout';
+
+import { Layout } from '@src/components';
+import usePostDetail from '@src/hooks/usePostDetail';
+import { numberWithCommasConverter } from '@src/utils/numberUtils';
+
 import { PostDetailWrap } from './styled';
-import { numberWithCommasConverter } from '../../utils/numberUtils';
 
 const PostDetail = () => {
 	const navigate = useNavigate();
@@ -34,7 +37,7 @@ const PostDetail = () => {
 							)}
 						</div>
 						<div className="postDiv">
-							<img src="/image/iphone.png" alt="postimage" />
+							<img src="/src/assets/image/iphone.png" alt="postimage" />
 							<div className="userDiv">
 								<FaCarrot />
 								<div className="userInfo">
@@ -44,9 +47,9 @@ const PostDetail = () => {
 								{postInfo.nickname !== loginUserName && (
 									<button onClick={() => onToggleLike()}>
 										{postInfo.isLiked ? (
-											<img src="/image/heart.png" alt="heartbutton" />
+											<img src="/src/assets/image/heart.png" alt="heartbutton" />
 										) : (
-											<img src="/image/emptyheart.png" alt="emptyheartbutton" />
+											<img src="/src/assets/image/emptyheart.png" alt="emptyheartbutton" />
 										)}
 									</button>
 								)}

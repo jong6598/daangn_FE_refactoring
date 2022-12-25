@@ -1,7 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FooterWrap } from './styled';
+
 import { HiHome, HiOutlineHome, HiChatAlt2, HiOutlineChatAlt2 } from 'react-icons/hi';
 import { RiUser3Fill, RiUser3Line } from 'react-icons/ri';
+
+import { FooterWrap } from './styled';
 
 const Footer = () => {
 	const navigate = useNavigate();

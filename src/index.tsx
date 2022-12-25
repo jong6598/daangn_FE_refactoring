@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-import App from './App';
-import { GlobalStyle, theme } from './styles';
+
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { ThemeProvider } from 'styled-components';
+
+import App from '@src/App';
+
+import { GlobalStyle, theme } from './styles';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
