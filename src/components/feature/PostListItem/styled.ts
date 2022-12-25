@@ -31,6 +31,9 @@ export const PostListItemWrap = styled.div`
 	}
 
 	.likeDiv {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		svg {
 			width: 1rem;
 			height: 1rem;

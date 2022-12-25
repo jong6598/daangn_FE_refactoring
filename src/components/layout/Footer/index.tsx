@@ -21,13 +21,7 @@ const Footer = () => {
 				<p>홈</p>
 			</div>
 			<div className="buttonDiv">
-				<button
-					onClick={() => {
-						navigate('/mychatroom');
-					}}
-				>
-					{currentPage === '/mychatroom' ? <HiChatAlt2 /> : <HiOutlineChatAlt2 />}
-				</button>
+				<button>{currentPage === '/mychatroom' ? <HiChatAlt2 /> : <HiOutlineChatAlt2 />}</button>
 				<p>채팅</p>
 			</div>
 			<div className="buttonDiv">

@@ -47,7 +47,7 @@ export const PostDetailWrap = styled.div`
 			gap: 1.5rem;
 			margin: 3rem 0;
 			svg {
-				width: 5rem;
+				width: 8rem;
 				height: 5rem;
 				color: #e78111;
 				padding: 0.3rem;
@@ -56,13 +56,13 @@ export const PostDetailWrap = styled.div`
 				border: 2px solid #e78111;
 			}
 			.userInfo {
+				width: 100%;
 				p {
 					margin-bottom: 0.5rem;
 				}
 			}
 		}
 		button {
-			margin-left: 15rem;
 			background-color: transparent;
 			border: 0;
 			cursor: pointer;

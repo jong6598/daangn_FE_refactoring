@@ -1,24 +1,25 @@
-import { fetchPostList, extractPostListByKeyword } from '../core/apis/post';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { queryKeys } from '../constants/queryKeys';
+
+import { queryKeys } from '@src/constants/queryKeys';
+import { fetchPostList, extractPostListByKeyword } from '@src/core/apis/post';
 
 type Props = {
 	area: string;
 	category: string;
 };
 
-const usePostList = (searchKeyword: string, postFilterObj: Props) => {
+const usePostList = (postFilterObj: Props, searchKeyword: string) => {
 	const getPosts = async (pageParam: number) => {
-		if (searchKeyword !== '') {
+		if (searchKeyword === '') {
+			const payload = await fetchPostList(postFilterObj.category, postFilterObj.area, pageParam);
+			const data = payload.list.content;
+			const last = payload.list.last;
+			return { data, last, nextPage: pageParam + 1 };
+		} else {
 			const payload = await extractPostListByKeyword(searchKeyword, pageParam);
 			const data = payload.list.content;
-			const last = payload.pageable.last;
-			return { data, nextPage: pageParam + 1, last };
-		} else {
-			const res = await fetchPostList(postFilterObj.category, postFilterObj.area, pageParam);
-			const data = res.list.content;
-			const last = res.pageable.last;
-			return { data, nextPage: pageParam + 1, last };
+			const last = payload.list.last;
+			return { data, last, nextPage: pageParam + 1 };
 		}
 	};
 
@@ -26,15 +27,16 @@ const usePostList = (searchKeyword: string, postFilterObj: Props) => {
 		data: postListData,
 		fetchNextPage,
 		isFetchingNextPage,
+		hasNextPage,
 	} = useInfiniteQuery(
-		[queryKeys.postList, postFilterObj.category, postFilterObj.area],
+		[queryKeys.postList, postFilterObj.category, postFilterObj.area, searchKeyword],
 		({ pageParam = 0 }) => getPosts(pageParam),
 		{
-			getNextPageParam: (lastPage) => (!lastPage.last ? lastPage.nextPage : undefined),
+			getNextPageParam: (postListData) => (!postListData.last ? postListData.nextPage : undefined),
 		},
 	);
 
-	return { postListData, fetchNextPage, isFetchingNextPage };
+	return { postListData, fetchNextPage, isFetchingNextPage, hasNextPage };
 };
 
 export default usePostList;

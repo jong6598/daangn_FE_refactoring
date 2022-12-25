@@ -24,7 +24,7 @@ const PostDetail = () => {
 							</button>
 							{postInfo.nickname === loginUserName && (
 								<div className="buttonDiv">
-									<button onClick={() => navigate(`/post/${params.postId}`)}>
+									<button onClick={() => navigate(`/post/${params.postId}/edit`, { state: postInfo })}>
 										<AiOutlineEdit />
 									</button>
 									<button onClick={() => onDelete()}>

@@ -59,5 +59,8 @@ export const MypageWrap = styled.div`
 	}
 	.contentDiv {
 		overflow-y: auto;
+		.filterDiv {
+			height: 0.1rem;
+		}
 	}
 `;

@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useInView } from 'react-intersection-observer';
-import { logout } from '../../core/apis/auth';
-import Layout from '../../components/layout';
-import { MypageWrap } from './styled';
-import { IoIosPaper } from 'react-icons/io';
+
 import { AiFillHeart } from 'react-icons/ai';
 import { FaCarrot } from 'react-icons/fa';
-import useMyPostList from '../../hooks/useMyPostList';
-import { PostDetailData } from '../../types/api';
-import PostListItem from '../../components/feature/PostListItem';
+import { IoIosPaper } from 'react-icons/io';
+import { useInView } from 'react-intersection-observer';
+
+import { Layout, PostListItem } from '@src/components';
+import SkeletonPostList from '@src/components/feature/Skeleton/SkeletonPostList';
+import { logout } from '@src/core/apis/auth';
+import useMyPostList from '@src/hooks/useMyPostList';
+import { PostDetailData } from '@src/types/api';
+
+import { MypageWrap } from './styled';
 
 const Mypage = () => {
 	const navigate = useNavigate();
@@ -58,26 +61,27 @@ const Mypage = () => {
 						<p>관심목록</p>
 					</button>
 				</div>
-				{myPostListData &&
-					myPostListData.pages.map((page: any, idx: number) => {
-						return (
-							<React.Fragment key={idx}>
-								{page.data.map((post: PostDetailData) => (
-									<div
-										className="contentDiv"
-										key={post.id}
-										style={{ cursor: 'pointer' }}
-										onClick={() => {
-											navigate(`/post/${post.id}`);
-										}}
-									>
-										<PostListItem post={post} />
-									</div>
-								))}
-							</React.Fragment>
-						);
-					})}
-				{isFetchingNextPage ? <div>로딩중...</div> : <div ref={ref} />}
+				<div className="contentDiv">
+					{myPostListData &&
+						myPostListData.pages.map((page: any, idx: number) => {
+							return (
+								<React.Fragment key={idx}>
+									{page.data.map((post: PostDetailData) => (
+										<div
+											key={post.id}
+											style={{ cursor: 'pointer' }}
+											onClick={() => {
+												navigate(`/post/${post.id}`);
+											}}
+										>
+											<PostListItem post={post} />
+										</div>
+									))}
+								</React.Fragment>
+							);
+						})}
+					{isFetchingNextPage ? <SkeletonPostList /> : <div className="filterDiv" ref={ref} />}
+				</div>
 			</MypageWrap>
 		</Layout>
 	);
