@@ -1,13 +1,14 @@
-import { fetchPostList, extractPostListByKeyword } from '../core/apis/post';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { queryKeys } from '../constants/queryKeys';
+
+import { queryKeys } from '@src/constants/queryKeys';
+import { fetchPostList, extractPostListByKeyword } from '@src/core/apis/post';
 
 type Props = {
 	area: string;
 	category: string;
 };
 
-const usePostList = (searchKeyword: string, postFilterObj: Props) => {
+const usePostList = (postFilterObj: Props, searchKeyword: string) => {
 	const getPosts = async (pageParam: number) => {
 		if (searchKeyword === '') {
 			const payload = await fetchPostList(postFilterObj.category, postFilterObj.area, pageParam);
@@ -26,15 +27,16 @@ const usePostList = (searchKeyword: string, postFilterObj: Props) => {
 		data: postListData,
 		fetchNextPage,
 		isFetchingNextPage,
+		hasNextPage,
 	} = useInfiniteQuery(
-		[queryKeys.postList, postFilterObj.area, postFilterObj.category, searchKeyword],
+		[queryKeys.postList, postFilterObj.category, postFilterObj.area, searchKeyword],
 		({ pageParam = 0 }) => getPosts(pageParam),
 		{
 			getNextPageParam: (postListData) => (!postListData.last ? postListData.nextPage : undefined),
 		},
 	);
 
-	return { postListData, fetchNextPage, isFetchingNextPage };
+	return { postListData, fetchNextPage, isFetchingNextPage, hasNextPage };
 };
 
 export default usePostList;
