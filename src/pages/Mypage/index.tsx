@@ -58,26 +58,27 @@ const Mypage = () => {
 						<p>관심목록</p>
 					</button>
 				</div>
-				{myPostListData &&
-					myPostListData.pages.map((page: any, idx: number) => {
-						return (
-							<React.Fragment key={idx}>
-								{page.data.map((post: PostDetailData) => (
-									<div
-										className="contentDiv"
-										key={post.id}
-										style={{ cursor: 'pointer' }}
-										onClick={() => {
-											navigate(`/post/${post.id}`);
-										}}
-									>
-										<PostListItem post={post} />
-									</div>
-								))}
-							</React.Fragment>
-						);
-					})}
-				{isFetchingNextPage ? <div>로딩중...</div> : <div ref={ref} />}
+				<div className="contentDiv">
+					{myPostListData &&
+						myPostListData.pages.map((page: any, idx: number) => {
+							return (
+								<React.Fragment key={idx}>
+									{page.data.map((post: PostDetailData) => (
+										<div
+											key={post.id}
+											style={{ cursor: 'pointer' }}
+											onClick={() => {
+												navigate(`/post/${post.id}`);
+											}}
+										>
+											<PostListItem post={post} />
+										</div>
+									))}
+								</React.Fragment>
+							);
+						})}
+					{isFetchingNextPage ? <div>로딩중...</div> : <div ref={ref} />}
+				</div>
 			</MypageWrap>
 		</Layout>
 	);
