@@ -1,9 +1,10 @@
 import { useEffect, useState, ComponentProps } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import Layout from '../../components/layout';
-import DropDown from '../../components/shared/DropDown';
-import { dropDownTable } from '../../constants/dropDown';
-import useAddPost from '../../hooks/useAddPost';
+
+import { Layout, DropDown } from '@src/components';
+import { dropDownTable } from '@src/constants/dropDown';
+import useAddPost from '@src/hooks/useAddPost';
+
 import { PostAddWrap } from './styled';
 
 type Props = {

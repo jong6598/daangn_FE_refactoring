@@ -1,12 +1,12 @@
-import requester from './requester';
-import { API_PATH, httpMethod } from './common';
+import { API_PATH, httpMethod } from '@src/core/apis/common';
+import requester from '@src/core/apis/requester';
 import {
 	PostListResponseDto,
 	EditPostRespnseDto,
 	LikeRespnseDto,
 	PostDetailResponseDto,
 	DeletePostResponseDto,
-} from '../../types/api';
+} from '@src/types/api';
 
 export const fetchPostList = async (category: string, area: string, pageParam: number) => {
 	const {
@@ -21,14 +21,14 @@ export const fetchPostList = async (category: string, area: string, pageParam: n
 	return payload;
 };
 
-export const extractPostListByKeyword = async (search: string, pageParam: number) => {
+export const extractPostListByKeyword = async (searchKeyword: string, pageParam: number) => {
 	const {
 		post: { postlist },
 	} = API_PATH;
 
 	const { payload } = await requester<PostListResponseDto>({
 		method: httpMethod.GET,
-		url: `${postlist}/search?keyword=${search}&page=${pageParam}&size=6`,
+		url: `${postlist}/search?keyword=${searchKeyword}&page=${pageParam}&size=6`,
 	});
 
 	return payload;

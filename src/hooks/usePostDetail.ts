@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { queryKeys } from '../constants/queryKeys';
-import { getPostDetail, likePost, unlikePost, deletePost } from '../core/apis/post';
+
+import { queryKeys } from '@src/constants/queryKeys';
+import { getPostDetail, likePost, unlikePost, deletePost } from '@src/core/apis/post';
 
 const usePostDetail = (postId: string) => {
 	const navigate = useNavigate();
