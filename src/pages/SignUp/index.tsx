@@ -11,7 +11,7 @@ const SignUp = () => {
 		onSubmit: async (values: object) => {
 			await signup(values);
 			alert('회원가입 완료! 로그인 페이지로 이동합니다.');
-			navigate('/singin');
+			navigate('/signin');
 		},
 		validateSign,
 	});

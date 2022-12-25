@@ -49,25 +49,26 @@ const PostList = () => {
 					</div>
 					<SearchInput onSearchByKeyword={handleSearchByKeyword} />
 				</div>
-				{postListData &&
-					postListData.pages.map((page: any, idx: number) => {
-						return (
-							<React.Fragment key={idx}>
-								{page.data.map((post: PostDetailData) => (
-									<div
-										className="listDiv"
-										key={post.id}
-										style={{ cursor: 'pointer' }}
-										onClick={() => {
-											navigate(`/post/${post.id}`);
-										}}
-									>
-										<PostListItem post={post} />
-									</div>
-								))}
-							</React.Fragment>
-						);
-					})}
+				<div className="listDiv">
+					{postListData &&
+						postListData.pages.map((page: any, idx: number) => {
+							return (
+								<React.Fragment key={idx}>
+									{page.data.map((post: PostDetailData) => (
+										<div
+											key={post.id}
+											style={{ cursor: 'pointer' }}
+											onClick={() => {
+												navigate(`/post/${post.id}`);
+											}}
+										>
+											<PostListItem post={post} />
+										</div>
+									))}
+								</React.Fragment>
+							);
+						})}
+				</div>
 				{isFetchingNextPage ? <div>로딩중...</div> : <div ref={ref} />}
 				<div className="postAddDiv">
 					<Link to="/addpost">
