@@ -8,7 +8,6 @@ const PostListItem = ({ post }: PostDetailResponseDto) => {
 		<PostListItemWrap>
 			<div className="postDiv">
 				<div className="imgDiv">
-					{/* {post.imageUrl ? <img src={post.imageUrl} alt="postImg" /> : <img src="/image/logo.png" alt="alternativeImg" />} */}
 					<img src="/image/logo.png" alt="postimage" />
 				</div>
 				<div className="infoDiv">
