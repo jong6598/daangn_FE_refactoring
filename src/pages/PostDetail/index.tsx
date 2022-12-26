@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AiOutlineHome, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import { FaCarrot } from 'react-icons/fa';
 
+import { EmptyHeart, Heart, Iphone } from '@src/assets/image';
 import { Layout } from '@src/components';
 import usePostDetail from '@src/hooks/usePostDetail';
 import { numberWithCommasConverter } from '@src/utils/numberUtils';
@@ -37,7 +38,7 @@ const PostDetail = () => {
 							)}
 						</div>
 						<div className="postDiv">
-							<img src="/src/assets/image/iphone.png" alt="postimage" />
+							<img src={Iphone} alt="postimage" />
 							<div className="userDiv">
 								<FaCarrot />
 								<div className="userInfo">
@@ -46,11 +47,7 @@ const PostDetail = () => {
 								</div>
 								{postInfo.nickname !== loginUserName && (
 									<button onClick={() => onToggleLike()}>
-										{postInfo.isLiked ? (
-											<img src="/src/assets/image/heart.png" alt="heartbutton" />
-										) : (
-											<img src="/src/assets/image/emptyheart.png" alt="emptyheartbutton" />
-										)}
+										{postInfo.isLiked ? <img src={Heart} alt="heartbutton" /> : <img src={EmptyHeart} alt="emptyheartbutton" />}
 									</button>
 								)}
 							</div>

@@ -1,5 +1,6 @@
 import { AiOutlineHeart } from 'react-icons/ai';
 
+import { Logo } from '@src/assets/image';
 import { PostDetailResponseDto } from '@src/types/api';
 import { numberWithCommasConverter } from '@src/utils/numberUtils';
 
@@ -10,7 +11,7 @@ const PostListItem = ({ post }: PostDetailResponseDto) => {
 		<PostListItemWrap>
 			<div className="postDiv">
 				<div className="imgDiv">
-					<img src="/src/assets/image/logo.png" alt="postimage" />
+					<img src={Logo} alt="postimage" />
 				</div>
 				<div className="infoDiv">
 					<p>{post.title}</p>
