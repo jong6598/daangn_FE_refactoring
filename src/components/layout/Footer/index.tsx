@@ -1,7 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FooterWrap } from './styled';
+
 import { HiHome, HiOutlineHome, HiChatAlt2, HiOutlineChatAlt2 } from 'react-icons/hi';
 import { RiUser3Fill, RiUser3Line } from 'react-icons/ri';
+
+import { FooterWrap } from './styled';
 
 const Footer = () => {
 	const navigate = useNavigate();
@@ -21,13 +23,7 @@ const Footer = () => {
 				<p>홈</p>
 			</div>
 			<div className="buttonDiv">
-				<button
-					onClick={() => {
-						navigate('/mychatroom');
-					}}
-				>
-					{currentPage === '/mychatroom' ? <HiChatAlt2 /> : <HiOutlineChatAlt2 />}
-				</button>
+				<button>{currentPage === '/mychatroom' ? <HiChatAlt2 /> : <HiOutlineChatAlt2 />}</button>
 				<p>채팅</p>
 			</div>
 			<div className="buttonDiv">

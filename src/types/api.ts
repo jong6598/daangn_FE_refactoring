@@ -18,7 +18,8 @@ export type PostContentDto = [
 		area: string;
 		imageUrl: string;
 		category: string;
-		after: number;
+		title: string;
+		after: string;
 		likeCount: number;
 	},
 ];
@@ -26,16 +27,31 @@ export type PostContentDto = [
 export type PostListResponseDto = {
 	list: {
 		content: PostContentDto;
+		empty: boolean;
+		first: boolean;
+		last: boolean;
+		number: 0;
+		numberOfElements: number;
+		pegeable: {
+			offset: number;
+			pageNumber: number;
+			pageSize: number;
+			paged: boolean;
+			sort: {
+				empty: boolean;
+				sorted: boolean;
+				unsorted: boolean;
+			};
+			unpaged: boolean;
+		};
+		size: number;
+		sort: {
+			empty: boolean;
+			sorted: boolean;
+			unsorted: boolean;
+		};
 	};
-	pageable: Pageable;
-};
-
-export type Pageable = {
-	totalPages: number;
-	totalElemets: string;
-	last: boolean;
-	size: number;
-	empty: boolean;
+	response: boolean;
 };
 
 export type EditPostRespnseDto = {

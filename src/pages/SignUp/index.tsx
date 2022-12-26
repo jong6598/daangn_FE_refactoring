@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import useForm from '../../hooks/useForm';
-import { signup } from '../../core/apis/auth';
-import validateSign from '../../utils/validateSign';
+
+import { signup } from '@src/core/apis/auth';
+import useForm from '@src/hooks/useForm';
+import validateSign from '@src/utils/validateSign';
+
 import { SignUpWrap, InputBox, Error, BtnContainer } from './styled';
 
 const SignUp = () => {
@@ -11,14 +13,14 @@ const SignUp = () => {
 		onSubmit: async (values: object) => {
 			await signup(values);
 			alert('회원가입 완료! 로그인 페이지로 이동합니다.');
-			navigate('/singin');
+			navigate('/signin');
 		},
 		validateSign,
 	});
 
 	return (
 		<SignUpWrap>
-			<img src="/image/logo.png" alt="logo" />
+			<img src="src/assets/image/logo.png" alt="logo" />
 			<h1>회원가입</h1>
 			<form onSubmit={handleSubmit}>
 				<InputBox>

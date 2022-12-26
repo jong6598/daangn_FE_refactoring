@@ -1,7 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { queryKeys } from '../constants/queryKeys';
-import { postNewPost, editPost } from '../core/apis/post';
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { queryKeys } from '@src/constants/queryKeys';
+import { postNewPost, editPost } from '@src/core/apis/post';
 
 type Props = {
 	isEditingMode: boolean;
@@ -15,21 +17,13 @@ const useAddPost = ({ isEditingMode, postValue, postId }: Props) => {
 
 	const addPost = async () => {
 		if (isEditingMode) {
-			try {
-				const data = await editPost(postValue, postId!);
-				alert('게시글이 수정되었습니다');
-				return data;
-			} catch (err) {
-				console.error(err);
-			}
+			const data = await editPost(postValue, postId!);
+			alert('게시글이 수정되었습니다');
+			return data;
 		} else {
-			try {
-				const data = await postNewPost(postValue);
-				alert('게시글이 등록되었습니다');
-				return data;
-			} catch (err) {
-				console.error(err);
-			}
+			const data = await postNewPost(postValue);
+			alert('게시글이 등록되었습니다');
+			return data;
 		}
 	};
 

@@ -35,6 +35,9 @@ export const PostListWrap = styled.div`
 		position: relative;
 		top: 7rem;
 		overflow-y: auto;
+		.filterDiv {
+			height: 0.1rem;
+		}
 	}
 	.postAddDiv {
 		position: fixed;

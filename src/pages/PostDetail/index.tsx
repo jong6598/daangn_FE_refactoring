@@ -1,9 +1,14 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
 import { AiOutlineHome, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import { FaCarrot } from 'react-icons/fa';
-import usePostDetail from '../../hooks/usePostDetail';
-import Layout from '../../components/layout';
+
+import { EmptyHeart, Heart, Iphone } from '@src/assets/image';
+import { Layout } from '@src/components';
+import usePostDetail from '@src/hooks/usePostDetail';
+import { numberWithCommasConverter } from '@src/utils/numberUtils';
+
 import { PostDetailWrap } from './styled';
 
 const PostDetail = () => {
@@ -23,37 +28,35 @@ const PostDetail = () => {
 							</button>
 							{postInfo.nickname === loginUserName && (
 								<div className="buttonDiv">
-									<button onClick={() => navigate(`/post/${params.postId}`)}>
+									<button onClick={() => navigate(`/post/${params.postId}/edit`, { state: postInfo })}>
 										<AiOutlineEdit />
 									</button>
-									<button onClick={() => onToggleLike()}>
+									<button onClick={() => onDelete()}>
 										<AiOutlineDelete />
 									</button>
 								</div>
 							)}
 						</div>
 						<div className="postDiv">
-							<img src="/image/iphone.png" alt="postimage" />
+							<img src={Iphone} alt="postimage" />
 							<div className="userDiv">
 								<FaCarrot />
 								<div className="userInfo">
 									<p>작성자: {postInfo.nickname}</p>
 									<p>지역: {postInfo.area}</p>
 								</div>
-								<button onClick={() => onDelete()}>
-									{postInfo.isLiked ? (
-										<img src="/image/heart.png" alt="heartbutton" />
-									) : (
-										<img src="/image/emptyheart.png" alt="emptyheartbutton" />
-									)}
-								</button>
+								{postInfo.nickname !== loginUserName && (
+									<button onClick={() => onToggleLike()}>
+										{postInfo.isLiked ? <img src={Heart} alt="heartbutton" /> : <img src={EmptyHeart} alt="emptyheartbutton" />}
+									</button>
+								)}
 							</div>
 							<div className="contentDiv">
 								<p className="title"> {postInfo.title}</p>
 								<p className="category">
-									{postInfo.category} · {postInfo.category}
+									{postInfo.category} · {postInfo.after}
 								</p>
-								<p> {postInfo.price}</p>
+								<p> {numberWithCommasConverter(String(postInfo.price))}원</p>
 								<p> {postInfo.content}</p>
 							</div>
 						</div>

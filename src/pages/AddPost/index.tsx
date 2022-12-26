@@ -1,22 +1,33 @@
 import { useEffect, useState, ComponentProps } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import Layout from '../../components/layout';
-import DropDown from '../../components/shared/DropDown';
-import { dropDownTable } from '../../constants/dropDown';
-import useAddPost from '../../hooks/useAddPost';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+
+import { Layout, DropDown } from '@src/components';
+import { dropDownTable } from '@src/constants/dropDown';
+import useAddPost from '@src/hooks/useAddPost';
+
 import { PostAddWrap } from './styled';
 
+type Props = {
+	title: string;
+	price: number;
+	area: string;
+	category: string;
+	content: string;
+	imageUrl: string;
+};
+
 const AddPost = () => {
+	const navigate = useNavigate();
 	const location = useLocation();
 	const params = useParams();
-	const editPostValue = location.state;
+	const editPostValue: Props = location.state;
 	const postId = params.postId;
 	const [isEditingMode, setIsEditingMode] = useState(false);
 	const [postValue, setPostValue] = useState({
 		title: '',
 		price: 0,
-		area: '',
-		category: '',
+		area: 'ALL',
+		category: 'ALL',
 		content: '',
 		imageUrl: '',
 	});
@@ -47,8 +58,8 @@ const AddPost = () => {
 
 	useEffect(() => {
 		if (
-			postValue.area !== '' &&
-			postValue.category !== '' &&
+			postValue.area !== 'ALL' &&
+			postValue.category !== 'ALL' &&
 			postValue.content !== '' &&
 			postValue.title !== '' &&
 			postValue.price !== 0
@@ -94,6 +105,8 @@ const AddPost = () => {
 						const result = window.confirm('등록하시겠습니까?');
 						if (result) {
 							onAdd();
+						} else {
+							navigate(-1);
 						}
 					}}
 					disabled={!validatePost}

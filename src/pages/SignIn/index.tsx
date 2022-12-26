@@ -1,7 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import useForm from '../../hooks/useForm';
-import validateSign from '../../utils/validateSign';
-import { signin } from '../../core/apis/auth';
+
+import { Logo } from '@src/assets/image';
+import { signin } from '@src/core/apis/auth';
+import useForm from '@src/hooks/useForm';
+import validateSign from '@src/utils/validateSign';
+
 import { SignInWrap, Error } from './styled';
 
 const SignIn = () => {
@@ -22,7 +25,7 @@ const SignIn = () => {
 
 	return (
 		<SignInWrap onSubmit={handleSubmit}>
-			<img src="/image/logo.png" alt="logo" />
+			<img src={Logo} alt="logo" />
 			<h1>로그인</h1>
 			<div className="inputDiv">
 				<label>ID</label>
