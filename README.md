@@ -256,7 +256,7 @@ const AreaOptions = [
 
 
 ## 배포 링크
- - 현재 post 관련 api 요청에서 500 server error가 발생. 해결 후 배포, 링크 게시 예정
+ - http://daangnvite.s3-website.ap-northeast-2.amazonaws.com/
 
 ## 실행 방법
 
@@ -362,22 +362,39 @@ https://www.youtube.com/watch?v=buMKHvXKEAY
 ```tsx
 📦src
  ┣ 📂assets
+ ┃ ┗ 📂image
+ ┃ ┃ ┣ 📜daangnHome.png
+ ┃ ┃ ┣ 📜emptyheart.png
+ ┃ ┃ ┣ 📜heart.png
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜iphone.png
+ ┃ ┃ ┗ 📜logo.png
  ┣ 📂components
  ┃ ┣ 📂feature
- ┃ ┃ ┗ 📂PostListItem
+ ┃ ┃ ┣ 📂PostListItem
  ┃ ┃ ┃ ┣ 📜index.tsx
  ┃ ┃ ┃ ┗ 📜styled.ts
+ ┃ ┃ ┗ 📂Skeleton
+ ┃ ┃ ┃ ┣ 📂SkeletonElement
+ ┃ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜styled.ts
+ ┃ ┃ ┃ ┗ 📂SkeletonPostList
+ ┃ ┃ ┃ ┃ ┣ 📂SkeletonPostListItem
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜styled.ts
+ ┃ ┃ ┃ ┃ ┗ 📜index.tsx
  ┃ ┣ 📂layout
  ┃ ┃ ┣ 📂Footer
  ┃ ┃ ┃ ┣ 📜index.tsx
  ┃ ┃ ┃ ┗ 📜styled.ts
  ┃ ┃ ┣ 📜index.tsx
  ┃ ┃ ┗ 📜styled.ts
- ┃ ┗ 📂shared
+ ┃ ┣ 📂shared
  ┃ ┃ ┣ 📂DropDown
  ┃ ┃ ┃ ┗ 📜index.tsx
  ┃ ┃ ┗ 📂SearchInput
  ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┗ 📜index.ts
  ┣ 📂constants
  ┃ ┣ 📜dropDown.ts
  ┃ ┗ 📜queryKeys.ts
@@ -412,9 +429,10 @@ https://www.youtube.com/watch?v=buMKHvXKEAY
  ┃ ┣ 📂SignIn
  ┃ ┃ ┣ 📜index.tsx
  ┃ ┃ ┗ 📜styled.ts
- ┃ ┗ 📂SignUp
+ ┃ ┣ 📂SignUp
  ┃ ┃ ┣ 📜index.tsx
  ┃ ┃ ┗ 📜styled.ts
+ ┃ ┗ 📜index.ts
  ┣ 📂router
  ┃ ┣ 📜index.tsx
  ┃ ┗ 📜routePath.ts
@@ -426,6 +444,7 @@ https://www.youtube.com/watch?v=buMKHvXKEAY
  ┃ ┗ 📜api.ts
  ┣ 📂utils
  ┃ ┣ 📜ArrayUtils.ts
+ ┃ ┣ 📜numberUtils.ts
  ┃ ┗ 📜validateSign.ts
  ┣ 📜App.tsx
  ┗ 📜index.tsx
@@ -442,18 +461,19 @@ https://www.youtube.com/watch?v=buMKHvXKEAY
 
 ## 추가 테스크
 
-1.  - [x] 500 server error 해결 이후 로직 확인 및 수정
+1.  - [x] 500 server error 해결 이후 로직 확인 및 수정 => https://github.com/jong6598/daangn_FE_refactoring/pull/13
 <img width="719" alt="스크린샷 2022-12-16 오후 9 25 52" src="https://user-images.githubusercontent.com/108744804/208263158-a6f093b6-dc2a-41ae-9a3b-8e752e9e4d39.png">
+
+
 
 2.  - [ ] errorBoundary & suspense 설정을 통한 error, loding 상태 핸들링
  - query onError 핸들러에서 throw error 방식으로 errorBoundary 처리
  - useErrorHandler hook 생성 후 errorBoundary 처리
  
-3. - [ ] import 순서, css 순서 컨벤션 따라 정리 & 절대경로 설정
- 
-4.  - [ ] 테스트 코드 라이브러리를 활용한 테스트코드 작성
+3. - [x] import 순서, css 순서 컨벤션 따라 정리 & 절대경로 설정 => https://github.com/jong6598/daangn_FE_refactoring/pull/14
 
-5.  - [ ] 채팅 기능 리펙토링 (프로젝트 당시 백엔드에서 authorization 관련 로직은 처리 못했던 기억이 있음)
+ 
+4.  - [ ] 채팅 기능 리펙토링 (프로젝트 당시 백엔드에서 authorization 관련 로직은 처리 못했던 기억이 있음)
 
 
 ## 참고자료
