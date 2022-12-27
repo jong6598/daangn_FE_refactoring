@@ -353,102 +353,12 @@ https://www.youtube.com/watch?v=buMKHvXKEAY
 ## 기술스택 & 레포지토리 구조
 
 
-![My Skills](https://skillicons.dev/icons?i=git,github,javascript,typescript,react,vscode,vite,stackoverflow,css,html)
-
- <img src="https://img.shields.io/badge/react-router-CA4245?style=for-the-badge&logo=react-router&logoColor=white">    <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">    <img src="https://img.shields.io/badge/eslint-181717?style=for-the-badge&logo=eslint&logoColor=white">      <img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E">     <img src="https://img.shields.io/badge/yarn-2C8EBB?style=for-the-badge&logo=yarn&logoColor=white">     <img src="https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=react query&logoColor=white"> 
+<img src="https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white"> <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=black"> <img src="https://img.shields.io/badge/react-router-CA4245?style=for-the-badge&logo=react-router&logoColor=white">    <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">    <img src="https://img.shields.io/badge/eslint-181717?style=for-the-badge&logo=eslint&logoColor=white">      <img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E">     <img src="https://img.shields.io/badge/yarn-2C8EBB?style=for-the-badge&logo=yarn&logoColor=white">     <img src="https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=react query&logoColor=white"> 
+<img src="https://img.shields.io/badge/styled-component-DB7093?style=for-the-badge&logo=styled component&logoColor=white">
 
 <br />
 
-```tsx
-📦src
- ┣ 📂assets
- ┃ ┗ 📂image
- ┃ ┃ ┣ 📜daangnHome.png
- ┃ ┃ ┣ 📜emptyheart.png
- ┃ ┃ ┣ 📜heart.png
- ┃ ┃ ┣ 📜index.ts
- ┃ ┃ ┣ 📜iphone.png
- ┃ ┃ ┗ 📜logo.png
- ┣ 📂components
- ┃ ┣ 📂feature
- ┃ ┃ ┣ 📂PostListItem
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜styled.ts
- ┃ ┃ ┗ 📂Skeleton
- ┃ ┃ ┃ ┣ 📂SkeletonElement
- ┃ ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┃ ┗ 📜styled.ts
- ┃ ┃ ┃ ┗ 📂SkeletonPostList
- ┃ ┃ ┃ ┃ ┣ 📂SkeletonPostListItem
- ┃ ┃ ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┃ ┃ ┗ 📜styled.ts
- ┃ ┃ ┃ ┃ ┗ 📜index.tsx
- ┃ ┣ 📂layout
- ┃ ┃ ┣ 📂Footer
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜styled.ts
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styled.ts
- ┃ ┣ 📂shared
- ┃ ┃ ┣ 📂DropDown
- ┃ ┃ ┃ ┗ 📜index.tsx
- ┃ ┃ ┗ 📂SearchInput
- ┃ ┃ ┃ ┗ 📜index.tsx
- ┃ ┗ 📜index.ts
- ┣ 📂constants
- ┃ ┣ 📜dropDown.ts
- ┃ ┗ 📜queryKeys.ts
- ┣ 📂core
- ┃ ┗ 📂apis
- ┃ ┃ ┣ 📜auth.ts
- ┃ ┃ ┣ 📜common.ts
- ┃ ┃ ┣ 📜post.ts
- ┃ ┃ ┗ 📜requester.ts
- ┣ 📂hooks
- ┃ ┣ 📜useAddPost.ts
- ┃ ┣ 📜useForm.ts
- ┃ ┣ 📜useMyPostList.ts
- ┃ ┣ 📜usePostDetail.ts
- ┃ ┗ 📜usePostList.ts
- ┣ 📂pages
- ┃ ┣ 📂AddPost
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styled.ts
- ┃ ┣ 📂Intro
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styled.ts
- ┃ ┣ 📂Mypage
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styled.ts
- ┃ ┣ 📂PostDetail
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styled.ts
- ┃ ┣ 📂PostList
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styled.ts
- ┃ ┣ 📂SignIn
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styled.ts
- ┃ ┣ 📂SignUp
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styled.ts
- ┃ ┗ 📜index.ts
- ┣ 📂router
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜routePath.ts
- ┣ 📂styles
- ┃ ┣ 📜GlobalStyle.tsx
- ┃ ┣ 📜index.ts
- ┃ ┗ 📜theme.ts
- ┣ 📂types
- ┃ ┗ 📜api.ts
- ┣ 📂utils
- ┃ ┣ 📜ArrayUtils.ts
- ┃ ┣ 📜numberUtils.ts
- ┃ ┗ 📜validateSign.ts
- ┣ 📜App.tsx
- ┗ 📜index.tsx
-```
+[레포지토리 구조](https://github.com/jong6598/daangn_FE_refactoring/wiki/%EB%A0%88%ED%8F%AC%EC%A7%80%ED%86%A0%EB%A6%AC-%EA%B5%AC%EC%A1%B0)
 
 <br />
 
