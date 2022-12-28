@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { queryKeys } from '@src/constants/queryKeys';
 import { getPostDetail, likePost, unlikePost, deletePost } from '@src/core/apis/post';
+import { PostDetailData } from '@src/types/api';
 
 const usePostDetail = (postId: string) => {
 	const navigate = useNavigate();
@@ -29,13 +30,28 @@ const usePostDetail = (postId: string) => {
 	};
 
 	const { mutate: onToggleLike } = useMutation(toggleLike, {
+		onMutate: async () => {
+			const snapshotOfPreviousPostDetail = queryClient.getQueryData<PostDetailData[]>([queryKeys.postDetail, postId]);
+			await queryClient.cancelQueries([queryKeys.postDetail]);
+			queryClient.setQueryData([queryKeys.postDetail, postId], () => {
+				return {
+					...postInfo,
+					isLiked: !postInfo?.isLiked,
+				};
+			});
+			return { snapshotOfPreviousPostDetail };
+		},
 		onSuccess: () => {
 			queryClient.invalidateQueries([queryKeys.postDetail], {
 				refetchType: 'all',
 			});
 			queryClient.invalidateQueries([queryKeys.postList], { refetchType: 'all' });
 		},
-		onError: () => {},
+		onError: (error, variables, context) => {
+			queryClient.setQueryData([queryKeys.postDetail, postId], () => {
+				return { ...context?.snapshotOfPreviousPostDetail };
+			});
+		},
 	});
 
 	const deleteContent = async () => {
