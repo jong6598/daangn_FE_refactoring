@@ -340,13 +340,6 @@ https://www.youtube.com/watch?v=buMKHvXKEAY
     - 추가 구현 예정 사항 
       - [ ] 이미지는 파이어베이스나 s3 스토리지를 사용해서 저장후 백엔드에 링크 넘겨주는 방식
 
-+ 추가 구현 예정 사항
-  - 실시간 채팅기능
-     - [ ] 게시글 상세에서 실시간 채팅 연결이 가능
-     - [ ] 소켓통신을 활용한 실시간 채팅
-     - [ ] 기존 채팅방이 없는 경우 채팅방 새로 생성, 기존 채팅방이 있는경우 기존 채팅방으로 연결
-     - [ ] 상단의 채팅을 누르면 이전 채팅 기록이 모두 노출
-
 <br />
 
 
@@ -383,8 +376,6 @@ https://www.youtube.com/watch?v=buMKHvXKEAY
 3. - [x] import 순서, css 순서 컨벤션 따라 정리 & 절대경로 설정 => https://github.com/jong6598/daangn_FE_refactoring/pull/14
 
  
-4.  - [ ] 채팅 기능 리펙토링 (프로젝트 당시 백엔드에서 authorization 관련 로직은 처리 못했던 기억이 있음)
-
 
 ## 참고자료
 
