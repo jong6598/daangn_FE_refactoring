@@ -17,7 +17,7 @@ const initialState: State = {
 	error: null,
 };
 
-class ErrorBoundary extends Component<Props, State> {
+class GlobalErrorBoundary extends Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
 		this.state = initialState;
@@ -44,4 +44,4 @@ class ErrorBoundary extends Component<Props, State> {
 	}
 }
 
-export default ErrorBoundary;
+export default GlobalErrorBoundary;
