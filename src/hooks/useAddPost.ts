@@ -37,6 +37,9 @@ const useAddPost = ({ isEditingMode, postValue, postId }: Props) => {
 				navigate(`/home`);
 			}
 		},
+		onError: () => {
+			throw new Error('게시물 등록실패');
+		},
 	});
 
 	return onAdd;

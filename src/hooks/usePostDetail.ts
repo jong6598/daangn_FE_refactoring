@@ -17,9 +17,7 @@ const usePostDetail = (postId: string) => {
 		return res;
 	};
 
-	const postInfo = useQuery([queryKeys.postDetail, postId], extractPostDetail, {
-		refetchOnWindowFocus: false,
-	}).data;
+	const postInfo = useQuery([queryKeys.postDetail, postId], extractPostDetail).data;
 
 	const toggleLike = async () => {
 		if (postInfo?.isLiked === false) {
@@ -74,7 +72,9 @@ const usePostDetail = (postId: string) => {
 			});
 			return navigate('/home');
 		},
-		onError: () => {},
+		onError: () => {
+			throw new Error('게시물 상세정보 조회 실패');
+		},
 	});
 
 	return { postInfo, onToggleLike, onDelete };
