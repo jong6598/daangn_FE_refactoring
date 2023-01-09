@@ -5,7 +5,6 @@ import { AxiosError } from 'axios';
 interface Props {
 	fallback: ElementType;
 	children?: ReactNode;
-	onReset?: () => void;
 }
 
 interface State {
@@ -43,16 +42,6 @@ class ApiErrorBoundary extends Component<Props, State> {
 		console.log(error, 'api에러바운더리');
 	}
 
-	onResetErrorBoundary = () => {
-		const { onReset } = this.props;
-		onReset == null ? void 0 : onReset();
-		this.reset();
-	};
-
-	reset() {
-		this.setState(initialState);
-	}
-
 	public render() {
 		const { shouldHandleError, shouldRethrow, error } = this.state;
 		const { children } = this.props;
@@ -63,7 +52,7 @@ class ApiErrorBoundary extends Component<Props, State> {
 		if (!shouldHandleError) {
 			return children;
 		}
-		return <this.props.fallback onReset={this.onResetErrorBoundary} onRefresh={this.reset} />;
+		return <this.props.fallback onReset={() => this.setState({ shouldHandleError: false })} />;
 	}
 }
 
