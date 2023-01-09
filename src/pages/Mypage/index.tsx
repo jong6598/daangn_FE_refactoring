@@ -1,25 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AiFillHeart } from 'react-icons/ai';
 import { FaCarrot } from 'react-icons/fa';
 import { IoIosPaper } from 'react-icons/io';
-import { useInView } from 'react-intersection-observer';
 
-import { Layout, PostListItem } from '@src/components';
-import SkeletonPostList from '@src/components/feature/Skeleton/SkeletonPostList';
+import { Layout } from '@src/components';
+import MypageList from '@src/components/feature/MypageList';
 import { logout } from '@src/core/apis/auth';
-import useMyPostList from '@src/hooks/useMyPostList';
-import { PostDetailData } from '@src/types/api';
+import ApiErrorBoundary from '@src/errorBoundary/ApiErrorBoundary';
+import ApiErrorPage from '@src/errorBoundary/ApiErrorPage';
 
 import { MypageWrap } from './styled';
 
 const Mypage = () => {
-	const navigate = useNavigate();
-	const { ref, inView } = useInView();
 	const [filter, setFilter] = useState('sale');
+	const navigate = useNavigate();
 	const nickName = JSON.parse(localStorage.getItem('userInfo')!).username;
-	const { myPostListData, fetchNextPage, isFetchingNextPage } = useMyPostList(filter);
 
 	const handleLogout = async () => {
 		await logout;
@@ -27,12 +24,6 @@ const Mypage = () => {
 		alert('로그아웃 되었습니다.');
 		navigate('/');
 	};
-
-	useEffect(() => {
-		if (inView) {
-			fetchNextPage();
-		}
-	}, [inView]);
 
 	return (
 		<Layout>
@@ -61,27 +52,9 @@ const Mypage = () => {
 						<p>관심목록</p>
 					</button>
 				</div>
-				<div className="contentDiv">
-					{myPostListData &&
-						myPostListData.pages.map((page: any, idx: number) => {
-							return (
-								<React.Fragment key={idx}>
-									{page.data.map((post: PostDetailData) => (
-										<div
-											key={post.id}
-											style={{ cursor: 'pointer' }}
-											onClick={() => {
-												navigate(`/post/${post.id}`);
-											}}
-										>
-											<PostListItem post={post} />
-										</div>
-									))}
-								</React.Fragment>
-							);
-						})}
-					{isFetchingNextPage ? <SkeletonPostList /> : <div className="filterDiv" ref={ref} />}
-				</div>
+				<ApiErrorBoundary fallback={ApiErrorPage}>
+					<MypageList filter={filter} />
+				</ApiErrorBoundary>
 			</MypageWrap>
 		</Layout>
 	);
