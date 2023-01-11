@@ -34,7 +34,7 @@ const Mypage = () => {
 					<FaCarrot />
 					<p>{nickName} 님</p>
 					<button onClick={handleLogout}>로그아웃</button>
-					<ToggleSwitch switchLabel="실종정보" />
+					<ToggleSwitch storageKey="Agreement" switchLabel="실종정보" />
 				</div>
 				<div className="filterDiv">
 					<button
