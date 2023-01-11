@@ -34,6 +34,7 @@ export const MypageWrap = styled.div`
 			border: none;
 			border-radius: 0.5rem;
 			background: #ffecd7;
+			margin-right: 11rem;
 		}
 	}
 	.filterDiv {

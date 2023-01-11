@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { FiPlusCircle } from 'react-icons/fi';
 
 import { Layout, DropDown, SearchInput } from '@src/components';
+import MissingInfoItem from '@src/components/feature/MissingInfoItem';
 import PostList from '@src/components/feature/PostList';
 import { dropDownTable } from '@src/constants/dropDown';
 import ApiErrorBoundary from '@src/errorBoundary/ApiErrorBoundary';
@@ -17,6 +18,7 @@ const PostListPage = () => {
 		area: 'ALL',
 		category: 'ALL',
 	});
+	const AgreementToMissingInfo = JSON.parse(localStorage.getItem('Agreement') || 'true');
 
 	const handleSearchByKeyword = (keyword: string) => {
 		setSearchKeyword(keyword);
@@ -41,6 +43,7 @@ const PostListPage = () => {
 					<SearchInput onSearchByKeyword={handleSearchByKeyword} />
 				</div>
 				<ApiErrorBoundary fallback={ApiErrorPage}>
+					{AgreementToMissingInfo && <MissingInfoItem />}
 					<PostList postFilterObj={postFilterObj} searchKeyword={searchKeyword} />
 					<div className="postAddDiv">
 						<Link to="/addpost">

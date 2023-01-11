@@ -7,6 +7,7 @@ import { IoIosPaper } from 'react-icons/io';
 
 import { Layout } from '@src/components';
 import MypageList from '@src/components/feature/MypageList';
+import ToggleSwitch from '@src/components/shared/ToggleSwitch';
 import { logout } from '@src/core/apis/auth';
 import ApiErrorBoundary from '@src/errorBoundary/ApiErrorBoundary';
 import ApiErrorPage from '@src/errorBoundary/ApiErrorPage';
@@ -33,6 +34,7 @@ const Mypage = () => {
 					<FaCarrot />
 					<p>{nickName} 님</p>
 					<button onClick={handleLogout}>로그아웃</button>
+					<ToggleSwitch switchLabel="실종정보" />
 				</div>
 				<div className="filterDiv">
 					<button

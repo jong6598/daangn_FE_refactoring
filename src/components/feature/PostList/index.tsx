@@ -21,6 +21,8 @@ const PostList = ({ postFilterObj, searchKeyword }: Props) => {
 
 	const { postListData, fetchNextPage, isFetchingNextPage, hasNextPage } = usePostList(postFilterObj, searchKeyword);
 
+	const AgreementToMissingInfo = JSON.parse(localStorage.getItem('Agreement') || 'true');
+
 	useEffect(() => {
 		if (inView && hasNextPage) {
 			fetchNextPage();
@@ -28,7 +30,7 @@ const PostList = ({ postFilterObj, searchKeyword }: Props) => {
 	}, [inView]);
 
 	return (
-		<PostListWrap>
+		<PostListWrap onMissingInfo={AgreementToMissingInfo}>
 			{postListData?.pages.map((page: any, idx: number) => {
 				return (
 					<React.Fragment key={idx}>
