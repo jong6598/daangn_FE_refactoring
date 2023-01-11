@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PostListWrap = styled.div`
+export const PostListPageWrap = styled.div`
 	position: relative;
 	.headerDiv {
 		z-index: 10;
@@ -28,15 +28,6 @@ export const PostListWrap = styled.div`
 					background: #f6f6f6;
 				}
 			}
-		}
-	}
-	.listDiv {
-		height: calc(100vh - 14rem);
-		position: relative;
-		top: 7rem;
-		overflow-y: auto;
-		.filterDiv {
-			height: 0.1rem;
 		}
 	}
 	.postAddDiv {
