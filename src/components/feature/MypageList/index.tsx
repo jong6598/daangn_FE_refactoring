@@ -44,7 +44,7 @@ const MypageList = ({ filter }: Props) => {
 					</React.Fragment>
 				);
 			})}
-			{isFetchingNextPage ? <SkeletonPostList /> : <div className="filterDiv" ref={ref} />}
+			{isFetchingNextPage ? <SkeletonPostList /> : <div className="inviewDiv" ref={ref} />}
 		</MypageListWrap>
 	);
 };
