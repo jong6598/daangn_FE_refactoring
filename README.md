@@ -236,24 +236,150 @@ const AreaOptions = [
 <br />
 
 <details>
-<summary>errorBoundary 를 활용한 error handling (진행예정)[]</summary>
+<summary>errorBoundary 를 활용한 error handling [https://github.com/jong6598/daangn_FE_refactoring/pull/17]</summary>
 	
 
 ### 결과물
-  
+
+![에러바운더리](https://user-images.githubusercontent.com/108744804/212015961-b2f38aaf-bef2-4a54-a220-a7414241071d.png)
 
 ### 구현 방법
-
 > 💫 errorBoundary 구현
-  
-+ 기존방식 
+```tsx
+import { ElementType, ReactNode, Component } from 'react';
 
-+ 변경 후 
+import { AxiosError } from 'axios';
+
+interface Props {
+	fallback: ElementType;
+	children?: ReactNode;
+}
+
+interface State {
+	shouldHandleError: boolean;
+	shouldRethrow: boolean;
+	error: Error | AxiosError | null;
+}
+
+const initialState: State = {
+	shouldHandleError: false,
+	shouldRethrow: false,
+	error: null,
+};
+
+class ApiErrorBoundary extends Component<Props, State> {
+	constructor(props: Props) {
+		super(props);
+		this.state = initialState;
+	}
+
+//401에러 클라이언트가 인증되지 않았을 때 발생하는 에러로, 흔히 말하는 로그인 에러이다.
+//로그인 에러의 경우 상위 GlobalErrorBoundary로 error를 전파하여 공통로직으로 처리한다.
+	public static getDerivedStateFromError(error: Error | AxiosError): State {
+		if (error instanceof AxiosError) {
+			if (error.response?.status === 401) {
+				return {
+					shouldHandleError: false,
+					shouldRethrow: true,
+					error,
+				};
+			}
+		}
+		return { shouldHandleError: true, shouldRethrow: false, error };
+	}
+
+	componentDidCatch(error: Error): void {
+		console.log(error, 'api에러바운더리');
+	}
+
+	public render() {
+		const { shouldHandleError, shouldRethrow, error } = this.state;
+		const { children } = this.props;
+
+//shouldRethrow가 true일때 상위 에러바운더리로 에러를 전파한다.
+		if (shouldRethrow) {
+			throw error;
+		}
+//shouldHandleError가 false 일때 정상적인 컴포넌트를 렌더링 해준다.
+		if (!shouldHandleError) {
+			return children;
+		}
+//shouldRethrow가 false, shouldHandleError가 true 일때, 에러를 처리해줄 fallback UI
+//onReset에는 shouldHandleError를 false로 setState하여 children을 re-mount 시켜 정상적인 UI를 다시 렌더링한다.
+		return <this.props.fallback onReset={() => this.setState({ shouldHandleError: false })} />;
+	}
+}
+
+export default ApiErrorBoundary;
+```
++ Api 요청한 데이터를 렌더링 시켜주는 컴포넌트를 분리하고 상위를 ApiErrorBoundary를 감싸서, api 요청 실패로 인한 에러는 컴포넌트 부분적으로 처리하고, 로그인 에러와 같은 공통적으로 처리할 에러들은 상위 GlobalErrorBoundary로 rethrow 하여 처리하는 로직으로 구현
 
 </details>
 
 <br />
 
+<details>
+<summary>비즈니스 부분 개선사항: 실종정보 컴포넌트 추가</summary>
+	
++ 당근마켓이 `동네사람간의 거래, 이웃간의 연결`을 모토로 시작한 당근마켓의 핵심가치와 지역커뮤니티를 기반으로 빠른 정보등을 유저들끼리 제공할 수 있는 당근마켓의 특성이 이러한 정보 업데이트에 도움이 될것으로 판단
+	
++ 실종사건이나 분실 등의 상황에서 인스타그램, 트위터 같은 sns와 당근마켓에 게시글을 썼다는 제보자들의 sns글을 보면서 이러한 기능을 추가한다면 기업의 사회적 역할을 제고하고, 이는 당근마켓의 활성화로 선순환 될수 있을 듯 함.
+
+### 결과물
+<img width="639" alt="스크린샷 2023-01-12 오후 5 13 11" src="https://user-images.githubusercontent.com/108744804/212016674-519bbdb0-8657-4a6d-91f7-20334e8a6d30.png">
+
+<img width="644" alt="스크린샷 2023-01-12 오후 5 12 30" src="https://user-images.githubusercontent.com/108744804/212016704-15c54780-146e-4819-a657-8e4d9e072835.png">
+
+<img width="643" alt="스크린샷 2023-01-12 오후 5 13 53" src="https://user-images.githubusercontent.com/108744804/212016732-8c200cc7-32a2-4b35-80a9-b03bd6643f23.png">
+
+### 구현 방법
+> 💫 ToggleSwitch 컴포넌트 구현
+```tsx
+import { ChangeEvent, useEffect, useState } from 'react';
+
+import { ToggleSwitchWrap, SwitchWrap } from './styled';
+
+type Props = {
+	storageKey: string;
+	switchLabel: string;
+};
+
+const ToggleSwitch = ({ storageKey, switchLabel }: Props) => {
+	const [switchState, setSwitchState] = useState(JSON.parse(localStorage.getItem('Agreement') || 'true'));
+
+	const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setSwitchState(!switchState);
+	};
+
+	useEffect(() => {
+		localStorage.setItem(storageKey, JSON.stringify(switchState));
+	}, [switchState]);
+
+	return (
+		<SwitchWrap>
+			<ToggleSwitchWrap checked={switchState}>
+				<input id="checkbox" type="checkbox" checked={switchState} onChange={handleOnChange} />
+			</ToggleSwitchWrap>
+			<span>
+				{switchLabel} {switchState ? 'On' : 'Off'}
+			</span>
+		</SwitchWrap>
+	);
+};
+
+export default ToggleSwitch;	
+```
+
++ storageKey, switchLabel을 props로 받는 ToggleSwitch 컴포넌트 구현
++ 마이페이지에서 버튼을 사용하고, 버튼의 상태에 따라 postListPage에서 실종정보를 보여줌
++ 단계를 발전시켜서 swiper를 추가하거나 따로 상세페이지 연결을 통해 정보를 더 얻을 수 있는 페이지로 라우팅 하는 등의 방식을 통해 보완 가능할듯.
+</details>
+
+<br />
+
+	
+  	
+	
 
 ## 배포 링크
  - http://daangnvite.s3-website.ap-northeast-2.amazonaws.com/
@@ -364,16 +490,11 @@ https://www.youtube.com/watch?v=buMKHvXKEAY
 
 ## 추가 테스크
 
-1.  - [x] 500 server error 해결 이후 로직 확인 및 수정 => https://github.com/jong6598/daangn_FE_refactoring/pull/13
-<img width="719" alt="스크린샷 2022-12-16 오후 9 25 52" src="https://user-images.githubusercontent.com/108744804/208263158-a6f093b6-dc2a-41ae-9a3b-8e752e9e4d39.png">
 
+1.  - [x] errorBoundary & suspense 설정을 통한 error, loding 상태 핸들링 => https://github.com/jong6598/daangn_FE_refactoring/pull/17
 
-
-2.  - [ ] errorBoundary & suspense 설정을 통한 error, loding 상태 핸들링
- - query onError 핸들러에서 throw error 방식으로 errorBoundary 처리
- - useErrorHandler hook 생성 후 errorBoundary 처리
- 
-3. - [x] import 순서, css 순서 컨벤션 따라 정리 & 절대경로 설정 => https://github.com/jong6598/daangn_FE_refactoring/pull/14
+	
+2. - [x] import 순서, css 순서 컨벤션 따라 정리 & 절대경로 설정 => https://github.com/jong6598/daangn_FE_refactoring/pull/14
 
  
 
