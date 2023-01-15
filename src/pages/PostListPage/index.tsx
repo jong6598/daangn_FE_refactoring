@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { FiPlusCircle } from 'react-icons/fi';
+import { FiPlusCircle } from '@react-icons/all-files/fi/FiPlusCircle';
 
 import { Layout, DropDown, SearchInput } from '@src/components';
 import MissingInfoItem from '@src/components/feature/MissingInfoItem';

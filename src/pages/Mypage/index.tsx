@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { AiFillHeart } from 'react-icons/ai';
-import { FaCarrot } from 'react-icons/fa';
-import { IoIosPaper } from 'react-icons/io';
+import { AiFillHeart } from '@react-icons/all-files/ai/AiFillHeart';
+import { FaCarrot } from '@react-icons/all-files/fa/FaCarrot';
+import { IoIosPaper } from '@react-icons/all-files/io/IoIosPaper';
 
 import { Layout } from '@src/components';
 import MypageList from '@src/components/feature/MypageList';
