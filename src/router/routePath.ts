@@ -11,4 +11,4 @@ export const PUBLIC_ROUTE_PATH = {
 	INTRO: '/',
 	SIGNUP: '/signup',
 	SIGNIN: '/signin',
-};
+} as const;
