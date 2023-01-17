@@ -2,7 +2,7 @@ import SkeletonElement from '@src/components/feature/Skeleton/SkeletonElement';
 
 import { SkeletonContainer } from './styled';
 
-const SkeletonPostListItem = () => {
+const SkeletonListItem = () => {
 	return (
 		<SkeletonContainer>
 			<div className="skeletonItemDiv">
@@ -23,4 +23,4 @@ const SkeletonPostListItem = () => {
 	);
 };
 
-export default SkeletonPostListItem;
+export default SkeletonListItem;

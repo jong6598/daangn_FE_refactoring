@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 
 import PostListItem from '@src/components/feature/PostListItem';
-import SkeletonPostList from '@src/components/feature/Skeleton/SkeletonPostList';
+import SkeletonList from '@src/components/feature/Skeleton/SkeletonList';
 import usePostList from '@src/hooks/usePostList';
 import { PostDetailData } from '@src/types/api';
 
@@ -48,7 +48,7 @@ const PostList = ({ postFilterObj, searchKeyword }: Props) => {
 					</React.Fragment>
 				);
 			})}
-			{isFetchingNextPage ? <SkeletonPostList /> : <div className="inviewDiv" ref={ref} />}
+			{isFetchingNextPage ? <SkeletonList /> : <div className="inviewDiv" ref={ref} />}
 		</PostListWrap>
 	);
 };
