@@ -30,7 +30,7 @@ const PostList = ({ postFilterObj, searchKeyword }: Props) => {
 	}, [inView]);
 
 	return (
-		<PostListWrap onMissingInfo={AgreementToMissingInfo}>
+		<PostListWrap AgreementToMissingInfo={AgreementToMissingInfo}>
 			{postListData?.pages.map((page: any, idx: number) => {
 				return (
 					<React.Fragment key={idx}>

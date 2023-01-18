@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const PostListWrap = styled.div<{ onMissingInfo: boolean }>`
+export const PostListWrap = styled.div<{ AgreementToMissingInfo: boolean }>`
 	position: relative;
-	height: ${({ onMissingInfo }) => (onMissingInfo ? 'calc(100vh - 23.9rem)' : 'calc(100vh - 14rem)')};
+	height: ${({ AgreementToMissingInfo }) => (AgreementToMissingInfo ? 'calc(100vh - 23.9rem)' : 'calc(100vh - 14rem)')};
 	top: 7rem;
 	overflow-y: auto;
 	.inviewDiv {
