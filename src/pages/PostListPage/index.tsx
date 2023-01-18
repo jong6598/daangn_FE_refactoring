@@ -20,27 +20,25 @@ const PostListPage = () => {
 	});
 	const AgreementToMissingInfo = JSON.parse(localStorage.getItem('Agreement') || 'true');
 
-	const handleSearchByKeyword = (keyword: string) => {
-		setSearchKeyword(keyword);
-	};
-
-	const handleDropdownFilterChange = (value: string, changeTarget: string) => {
-		setPostFilterObj({ ...postFilterObj, [changeTarget]: value });
-	};
-
 	return (
 		<Layout>
 			<PostListPageWrap>
 				<div className="headerDiv">
 					<div className="filterDiv">
-						<DropDown dropdownTarget="area" options={dropDownTable.AreaOptions} onDropdownChange={handleDropdownFilterChange} />
-						<DropDown
+						<DropDown<typeof postFilterObj>
+							dropdownTarget="area"
+							options={dropDownTable.AreaOptions}
+							filterObj={postFilterObj}
+							setFilterObj={setPostFilterObj}
+						/>
+						<DropDown<typeof postFilterObj>
 							dropdownTarget="category"
 							options={dropDownTable.CategoryOptions}
-							onDropdownChange={handleDropdownFilterChange}
+							filterObj={postFilterObj}
+							setFilterObj={setPostFilterObj}
 						/>
 					</div>
-					<SearchInput onSearchByKeyword={handleSearchByKeyword} />
+					<SearchInput setSearchKeyword={setSearchKeyword} />
 				</div>
 				<ApiErrorBoundary fallback={ApiErrorPage}>
 					{AgreementToMissingInfo && <MissingInfoItem />}
