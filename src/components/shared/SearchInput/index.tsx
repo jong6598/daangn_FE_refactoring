@@ -1,15 +1,19 @@
-import React, { useRef } from 'react';
+import React, { SetStateAction, useRef } from 'react';
 
 type Props = {
-	onSearchByKeyword: (keyword: string) => void;
+	setSearchKeyword: React.Dispatch<SetStateAction<string>>;
 };
 
 const SearchInput = (props: Props) => {
 	const searchInputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
+	const handleSearchByKeyword = (keyword: string) => {
+		props.setSearchKeyword(keyword);
+	};
+
 	const handleSearchFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		props.onSearchByKeyword(searchInputRef?.current?.value);
+		handleSearchByKeyword(searchInputRef?.current?.value);
 	};
 
 	return (
