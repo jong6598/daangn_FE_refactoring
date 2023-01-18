@@ -1,10 +1,18 @@
+import React from 'react';
 import { Routes, Route } from 'react-router';
 
-import { SignIn, Intro, SignUp, PostListPage, Mypage, AddPost, PostDetail } from '@src/pages';
 import PrivateRoute from '@src/router/PrivateRoute';
 import { isValidArray } from '@src/utils/ArrayUtils';
 
 import { PRIVATE_ROUTE_PATH, PUBLIC_ROUTE_PATH } from './routePath';
+
+const SignIn = React.lazy(() => import('@src/pages/SignIn'));
+const Intro = React.lazy(() => import('@src/pages/Intro'));
+const SignUp = React.lazy(() => import('@src/pages/SignUp'));
+const PostListPage = React.lazy(() => import('@src/pages/PostListPage'));
+const Mypage = React.lazy(() => import('@src/pages/Mypage'));
+const AddPost = React.lazy(() => import('@src/pages/AddPost'));
+const PostDetail = React.lazy(() => import('@src/pages/PostDetail'));
 
 const privateRoutes = [
 	{ id: 1, path: PRIVATE_ROUTE_PATH.POSTLIST, element: <PostListPage /> },
