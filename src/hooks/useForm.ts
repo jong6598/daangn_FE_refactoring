@@ -10,7 +10,7 @@ type DataProps = {
 type Props = {
 	initialValues: { username: string; password: string; nickname?: string; confirmPassword?: string };
 	onSubmit: ({}: DataProps) => void;
-	validateSign: any;
+	validateSign: ({}: DataProps) => { username: string; password: string; nickname: string; confirmPassword: string };
 };
 
 const useForm = ({ initialValues, onSubmit, validateSign }: Props) => {
