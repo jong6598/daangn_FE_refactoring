@@ -1,5 +1,3 @@
-import { SetStateAction } from 'react';
-
 type Option = {
 	id: number;
 	value: string;
@@ -10,7 +8,7 @@ type Props<T> = {
 	dropdownTarget: string;
 	options: Array<Option>;
 	filterObj: T;
-	setFilterObj: React.Dispatch<SetStateAction<T>>;
+	setFilterObj: (filterObj: T) => void;
 };
 
 const DropDown = <T extends object>(props: Props<T>) => {

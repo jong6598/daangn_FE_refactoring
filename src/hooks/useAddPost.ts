@@ -1,4 +1,4 @@
-import React, { useEffect, ComponentProps } from 'react';
+import { useEffect, ComponentProps } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -19,8 +19,8 @@ type Props = {
 	isEditingMode: boolean;
 	postValue: PostValue;
 	postId: string | undefined;
-	setPostValue: React.Dispatch<React.SetStateAction<PostValue>>;
-	setValidatePost: React.Dispatch<React.SetStateAction<boolean>>;
+	setPostValue: (postValue: PostValue) => void;
+	setValidatePost: (validatePost: boolean) => void;
 };
 
 const useAddPost = ({ isEditingMode, postValue, postId, setPostValue, setValidatePost }: Props) => {

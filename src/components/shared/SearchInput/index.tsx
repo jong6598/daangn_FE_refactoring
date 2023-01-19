@@ -1,7 +1,7 @@
-import React, { SetStateAction, useRef } from 'react';
+import React, { useRef } from 'react';
 
 type Props = {
-	setSearchKeyword: React.Dispatch<SetStateAction<string>>;
+	setSearchKeyword: (searchKeyword: string) => void;
 };
 
 const SearchInput = (props: Props) => {
