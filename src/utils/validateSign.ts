@@ -15,13 +15,13 @@ const validateSign = ({ username, password, nickname, confirmPassword }: Props) 
 
 	if (username === '') {
 		errors.username = '아이디가 입력되지 않았습니다.';
-	} else if (username.length < 3) {
+	} else if (username.length <= 3) {
 		errors.username = '4자 이상의 아이디를 사용해주세요.';
 	}
 
 	if (password === '') {
 		errors.password = '비밀번호가 입력되지 않았습니다.';
-	} else if (password.length <= 4) {
+	} else if (password.length <= 5) {
 		errors.password = '6자 이상의 패스워드를 사용해주세요.';
 	}
 

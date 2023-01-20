@@ -1,4 +1,4 @@
-import { useState, ComponentProps } from 'react';
+import { useState, ComponentProps, useEffect } from 'react';
 
 type DataProps = {
 	username: string;
@@ -20,8 +20,11 @@ const useForm = ({ initialValues, onSubmit, validateSign }: Props) => {
 	const handleChange: ComponentProps<'input'>['onChange'] = (e) => {
 		const { name, value } = e.target;
 		setValues({ ...values, [name]: value });
-		setErrors(validateSign(values));
 	};
+
+	useEffect(() => {
+		setErrors(validateSign(values));
+	}, [values]);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		setErrors(validateSign(values));
