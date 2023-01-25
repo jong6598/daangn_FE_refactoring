@@ -17,7 +17,7 @@ import { MypageWrap } from './styled';
 const Mypage = () => {
 	const [filter, setFilter] = useState('sale');
 	const navigate = useNavigate();
-	const nickName = JSON.parse(localStorage.getItem('userInfo')!).username;
+	const nickName = JSON.parse(localStorage.getItem('userInfo')!).nickname;
 
 	const handleLogout = async () => {
 		await logout;
