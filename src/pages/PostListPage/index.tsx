@@ -42,7 +42,7 @@ const PostListPage = () => {
 				</div>
 				<ApiErrorBoundary fallback={ApiErrorPage}>
 					{AgreementToMissingInfo && <MissingInfoItem />}
-					<PostList postFilterObj={postFilterObj} searchKeyword={searchKeyword} />
+					<PostList postFilterObj={postFilterObj} searchKeyword={searchKeyword} AgreementToMissingInfo={AgreementToMissingInfo} />
 					<div className="postAddDiv">
 						<Link to="/addpost">
 							<FiPlusCircle />
