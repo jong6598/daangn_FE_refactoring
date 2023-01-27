@@ -5,15 +5,20 @@ const theme: DefaultTheme = {
 		fs12: '12px',
 		fs14: '14px',
 		fs16: '16px',
+		fs18: '18px',
 	},
 	fontWeights: {
 		fw500: 500,
 		fw700: 700,
+		fw800: 800,
 	},
 	colors: {
 		red: '#EA3A4B',
 		green: '#00AA8B',
-		primary: '#FF7E36',
+		primary: {
+			'100': '#ffecd7',
+			'200': '#FF7E36',
+		},
 		gray: {
 			'100': '#F6F7F8',
 			'200': '#EDEFF1',

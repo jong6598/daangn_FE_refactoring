@@ -1,25 +1,44 @@
+import React from 'react';
 import { Routes, Route } from 'react-router';
 
-import { SignIn, Intro, SignUp, PostList, Mypage, AddPost, PostDetail } from '@src/pages';
+import PrivateRoute from '@src/router/PrivateRoute';
 import { isValidArray } from '@src/utils/ArrayUtils';
 
-import { ROUTE_PATH } from './routePath';
+import { PRIVATE_ROUTE_PATH, PUBLIC_ROUTE_PATH } from './routePath';
 
-const routes = [
-	{ id: 1, path: ROUTE_PATH.INTRO, element: <Intro /> },
-	{ id: 2, path: ROUTE_PATH.SIGNUP, element: <SignUp /> },
-	{ id: 3, path: ROUTE_PATH.SIGNIN, element: <SignIn /> },
-	{ id: 4, path: ROUTE_PATH.POSTLIST, element: <PostList /> },
-	{ id: 5, path: ROUTE_PATH.MYPAGE, element: <Mypage /> },
-	{ id: 6, path: ROUTE_PATH.ADDPOST, element: <AddPost /> },
-	{ id: 7, path: ROUTE_PATH.EDITPOST, element: <AddPost /> },
-	{ id: 8, path: ROUTE_PATH.POSTDETAIL, element: <PostDetail /> },
+const SignIn = React.lazy(() => import('@src/pages/SignIn'));
+const Intro = React.lazy(() => import('@src/pages/Intro'));
+const SignUp = React.lazy(() => import('@src/pages/SignUp'));
+const PostListPage = React.lazy(() => import('@src/pages/PostListPage'));
+const Mypage = React.lazy(() => import('@src/pages/Mypage'));
+const AddPost = React.lazy(() => import('@src/pages/AddPost'));
+const PostDetail = React.lazy(() => import('@src/pages/PostDetail'));
+
+const privateRoutes = [
+	{ id: 1, path: PRIVATE_ROUTE_PATH.POSTLIST, element: <PostListPage /> },
+	{ id: 2, path: PRIVATE_ROUTE_PATH.MYPAGE, element: <Mypage /> },
+	{ id: 3, path: PRIVATE_ROUTE_PATH.ADDPOST, element: <AddPost /> },
+	{ id: 4, path: PRIVATE_ROUTE_PATH.EDITPOST, element: <AddPost /> },
+	{ id: 5, path: PRIVATE_ROUTE_PATH.POSTDETAIL, element: <PostDetail /> },
+];
+
+const publicRoutes = [
+	{ id: 1, path: PUBLIC_ROUTE_PATH.INTRO, element: <Intro /> },
+	{ id: 2, path: PUBLIC_ROUTE_PATH.SIGNUP, element: <SignUp /> },
+	{ id: 3, path: PUBLIC_ROUTE_PATH.SIGNIN, element: <SignIn /> },
 ];
 
 const Router = () => {
 	return (
 		<Routes>
-			{isValidArray(routes) && routes.map(({ id, path, element }) => <Route key={id} path={path} element={element} />)}
+			<Route element={<PrivateRoute authentication={true} />}>
+				{isValidArray(privateRoutes) &&
+					privateRoutes.map(({ id, path, element }) => <Route key={id} path={path} element={element} />)}
+			</Route>
+			<Route element={<PrivateRoute authentication={false} />}>
+				{isValidArray(publicRoutes) &&
+					publicRoutes.map(({ id, path, element }) => <Route key={id} path={path} element={element} />)}
+			</Route>
 		</Routes>
 	);
 };

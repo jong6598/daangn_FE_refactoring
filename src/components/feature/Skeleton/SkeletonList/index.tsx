@@ -1,6 +1,6 @@
-import SkeletonPostListItem from './SkeletonPostListItem';
+import SkeletonPostListItem from './SkeletonListItem';
 
-const SkeletonPostList = () => {
+const SkeletonList = () => {
 	return (
 		<>
 			<SkeletonPostListItem />
@@ -13,4 +13,4 @@ const SkeletonPostList = () => {
 	);
 };
 
-export default SkeletonPostList;
+export default SkeletonList;

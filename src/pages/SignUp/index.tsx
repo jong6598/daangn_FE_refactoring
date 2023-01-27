@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
+import { Logo } from '@src/assets/image';
 import { signup } from '@src/core/apis/auth';
 import useForm from '@src/hooks/useForm';
 import validateSign from '@src/utils/validateSign';
@@ -20,7 +21,7 @@ const SignUp = () => {
 
 	return (
 		<SignUpWrap>
-			<img src="src/assets/image/logo.png" alt="logo" />
+			<img src={Logo} alt="logo" />
 			<h1>회원가입</h1>
 			<form onSubmit={handleSubmit}>
 				<InputBox>

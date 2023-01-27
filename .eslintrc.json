@@ -25,7 +25,7 @@
 		"react/react-in-jsx-scope": "off",
 		"no-var": "error",
 		"no-unused-vars": ["error", { "args": "none" }],
-		"eqeqeq": "error",
+		"eqeqeq": "off",
 		"no-console": "off",
 		"import/order": [
 			"error",

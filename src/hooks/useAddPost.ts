@@ -1,3 +1,4 @@
+import { useEffect, ComponentProps } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -5,15 +6,52 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '@src/constants/queryKeys';
 import { postNewPost, editPost } from '@src/core/apis/post';
 
-type Props = {
-	isEditingMode: boolean;
-	postValue: object;
-	postId: string | undefined;
+type PostValue = {
+	title: string;
+	price: number;
+	area: string;
+	category: string;
+	content: string;
+	imageUrl: string;
 };
 
-const useAddPost = ({ isEditingMode, postValue, postId }: Props) => {
+type Props = {
+	isEditingMode: boolean;
+	postValue: PostValue;
+	postId: string | undefined;
+	setPostValue: (postValue: PostValue) => void;
+	setValidatePost: (validatePost: boolean) => void;
+};
+
+const useAddPost = ({ isEditingMode, postValue, postId, setPostValue, setValidatePost }: Props) => {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
+
+	const onChangeInput: ComponentProps<'input'>['onChange'] = (e) => {
+		setPostValue({
+			...postValue,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const onChangeTextArea: ComponentProps<'textarea'>['onChange'] = (e) => {
+		setPostValue({
+			...postValue,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	useEffect(() => {
+		if (
+			postValue.area !== 'ALL' &&
+			postValue.category !== 'ALL' &&
+			postValue.content !== '' &&
+			postValue.title !== '' &&
+			postValue.price !== 0
+		) {
+			setValidatePost(true);
+		}
+	}, [postValue]);
 
 	const addPost = async () => {
 		if (isEditingMode) {
@@ -37,9 +75,12 @@ const useAddPost = ({ isEditingMode, postValue, postId }: Props) => {
 				navigate(`/home`);
 			}
 		},
+		onError: () => {
+			throw new Error('게시물 등록실패');
+		},
 	});
 
-	return onAdd;
+	return { onAdd, onChangeInput, onChangeTextArea };
 };
 
 export default useAddPost;

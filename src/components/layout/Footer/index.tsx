@@ -1,7 +1,11 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { HiHome, HiOutlineHome, HiChatAlt2, HiOutlineChatAlt2 } from 'react-icons/hi';
-import { RiUser3Fill, RiUser3Line } from 'react-icons/ri';
+import { HiChatAlt2 } from '@react-icons/all-files/hi/HiChatAlt2';
+import { HiHome } from '@react-icons/all-files/hi/HiHome';
+import { HiOutlineChatAlt2 } from '@react-icons/all-files/hi/HiOutlineChatAlt2';
+import { HiOutlineHome } from '@react-icons/all-files/hi/HiOutlineHome';
+import { RiUser3Fill } from '@react-icons/all-files/ri/RiUser3Fill';
+import { RiUser3Line } from '@react-icons/all-files/ri/RiUser3Line';
 
 import { FooterWrap } from './styled';
 

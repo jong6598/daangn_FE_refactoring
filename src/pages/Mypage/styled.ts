@@ -34,6 +34,7 @@ export const MypageWrap = styled.div`
 			border: none;
 			border-radius: 0.5rem;
 			background: #ffecd7;
+			margin-right: 11rem;
 		}
 	}
 	.filterDiv {
@@ -55,12 +56,6 @@ export const MypageWrap = styled.div`
 				color: #e78111;
 				background-color: #ffecd7;
 			}
-		}
-	}
-	.contentDiv {
-		overflow-y: auto;
-		.filterDiv {
-			height: 0.1rem;
 		}
 	}
 `;

@@ -16,7 +16,7 @@ const SignIn = () => {
 			localStorage.setItem('TOKEN', payload.token);
 			localStorage.setItem(
 				'userInfo',
-				JSON.stringify({ userId: payload.userId, username: payload.username, nickname: payload.username }),
+				JSON.stringify({ userId: payload.userId, username: payload.username, nickname: payload.nickname }),
 			);
 			navigate('/home');
 		},
