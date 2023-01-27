@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 
 import PostListItem from '@src/components/feature/PostListItem';
-import SkeletonPostList from '@src/components/feature/Skeleton/SkeletonPostList';
+import SkeletonList from '@src/components/feature/Skeleton/SkeletonList';
+import NoData from '@src/components/shared/NoData';
 import usePostList from '@src/hooks/usePostList';
 import { PostDetailData } from '@src/types/api';
 
@@ -13,15 +14,14 @@ import { PostListWrap } from './styled';
 type Props = {
 	postFilterObj: { area: string; category: string };
 	searchKeyword: string;
+	AgreementToMissingInfo: boolean;
 };
 
-const PostList = ({ postFilterObj, searchKeyword }: Props) => {
+const PostList = ({ postFilterObj, searchKeyword, AgreementToMissingInfo }: Props) => {
 	const { ref, inView } = useInView();
 	const navigate = useNavigate();
 
 	const { postListData, fetchNextPage, isFetchingNextPage, hasNextPage } = usePostList(postFilterObj, searchKeyword);
-
-	const AgreementToMissingInfo = JSON.parse(localStorage.getItem('Agreement') || 'true');
 
 	useEffect(() => {
 		if (inView && hasNextPage) {
@@ -29,8 +29,13 @@ const PostList = ({ postFilterObj, searchKeyword }: Props) => {
 		}
 	}, [inView]);
 
+	console.log(typeof postListData?.pages[0].data.length);
+
 	return (
-		<PostListWrap onMissingInfo={AgreementToMissingInfo}>
+		<PostListWrap AgreementToMissingInfo={AgreementToMissingInfo}>
+			{postListData?.pages[0].data.length === parseInt('0') && (
+				<NoData dataName={'게시물'} heigthSize={AgreementToMissingInfo ? 'calc(100vh - 23.9rem)' : 'calc(100vh - 14rem)'} />
+			)}
 			{postListData?.pages.map((page: any, idx: number) => {
 				return (
 					<React.Fragment key={idx}>
@@ -48,7 +53,7 @@ const PostList = ({ postFilterObj, searchKeyword }: Props) => {
 					</React.Fragment>
 				);
 			})}
-			{isFetchingNextPage ? <SkeletonPostList /> : <div className="inviewDiv" ref={ref} />}
+			{isFetchingNextPage ? <SkeletonList /> : <div className="inviewDiv" ref={ref} />}
 		</PostListWrap>
 	);
 };

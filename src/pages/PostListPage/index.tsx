@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { FiPlusCircle } from 'react-icons/fi';
+import { FiPlusCircle } from '@react-icons/all-files/fi/FiPlusCircle';
 
 import { Layout, DropDown, SearchInput } from '@src/components';
 import MissingInfoItem from '@src/components/feature/MissingInfoItem';
@@ -20,31 +20,29 @@ const PostListPage = () => {
 	});
 	const AgreementToMissingInfo = JSON.parse(localStorage.getItem('Agreement') || 'true');
 
-	const handleSearchByKeyword = (keyword: string) => {
-		setSearchKeyword(keyword);
-	};
-
-	const handleDropdownFilterChange = (value: string, changeTarget: string) => {
-		setPostFilterObj({ ...postFilterObj, [changeTarget]: value });
-	};
-
 	return (
 		<Layout>
 			<PostListPageWrap>
 				<div className="headerDiv">
 					<div className="filterDiv">
-						<DropDown dropdownTarget="area" options={dropDownTable.AreaOptions} onDropdownChange={handleDropdownFilterChange} />
-						<DropDown
+						<DropDown<typeof postFilterObj>
+							dropdownTarget="area"
+							options={dropDownTable.AreaOptions}
+							filterObj={postFilterObj}
+							setFilterObj={setPostFilterObj}
+						/>
+						<DropDown<typeof postFilterObj>
 							dropdownTarget="category"
 							options={dropDownTable.CategoryOptions}
-							onDropdownChange={handleDropdownFilterChange}
+							filterObj={postFilterObj}
+							setFilterObj={setPostFilterObj}
 						/>
 					</div>
-					<SearchInput onSearchByKeyword={handleSearchByKeyword} />
+					<SearchInput setSearchKeyword={setSearchKeyword} />
 				</div>
 				<ApiErrorBoundary fallback={ApiErrorPage}>
 					{AgreementToMissingInfo && <MissingInfoItem />}
-					<PostList postFilterObj={postFilterObj} searchKeyword={searchKeyword} />
+					<PostList postFilterObj={postFilterObj} searchKeyword={searchKeyword} AgreementToMissingInfo={AgreementToMissingInfo} />
 					<div className="postAddDiv">
 						<Link to="/addpost">
 							<FiPlusCircle />

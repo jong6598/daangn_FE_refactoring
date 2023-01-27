@@ -15,7 +15,7 @@ export const ToggleSwitchWrap = styled.label<{ checked: boolean }>`
 	width: 5rem;
 	height: 2.5rem;
 	display: block;
-	background: ${({ checked, theme }) => (checked ? theme.colors.primary : theme.colors.gray[300])};
+	background: ${({ checked, theme }) => (checked ? theme.colors.primary[200] : theme.colors.gray[300])};
 	border-radius: 6.25rem;
 	position: relative;
 	&:after {

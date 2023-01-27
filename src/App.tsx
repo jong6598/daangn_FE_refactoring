@@ -1,13 +1,14 @@
 import { Suspense } from 'react';
 
+import Loader from '@src/components/shared/Loader';
 import GlobalErrorBoundary from '@src/errorBoundary/ErrorBoundary';
-import ErrorPage from '@src/errorBoundary/GlobalErrorPage';
+import GlobalErrorPage from '@src/errorBoundary/GlobalErrorPage';
 import Router from '@src/router/index';
 
 const App = () => {
 	return (
-		<GlobalErrorBoundary fallback={ErrorPage}>
-			<Suspense fallback={<div>로딩중...</div>}>
+		<GlobalErrorBoundary fallback={GlobalErrorPage}>
+			<Suspense fallback={<Loader />}>
 				<Router />
 			</Suspense>
 		</GlobalErrorBoundary>

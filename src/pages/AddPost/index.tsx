@@ -1,5 +1,5 @@
-import { useEffect, useState, ComponentProps } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 
 import { Layout, DropDown } from '@src/components';
 import { dropDownTable } from '@src/constants/dropDown';
@@ -17,7 +17,6 @@ type Props = {
 };
 
 const AddPost = () => {
-	const navigate = useNavigate();
 	const location = useLocation();
 	const params = useParams();
 	const editPostValue: Props = location.state;
@@ -32,22 +31,15 @@ const AddPost = () => {
 		imageUrl: '',
 	});
 	const { title, price, content } = postValue;
-	const onAdd = useAddPost({ isEditingMode, postValue, postId });
 	const [validatePost, setValidatePost] = useState(false);
 
-	const onChangeInput: ComponentProps<'input'>['onChange'] = (e) => {
-		setPostValue({
-			...postValue,
-			[e.target.name]: e.target.value,
-		});
-	};
-
-	const onChangeTextArea: ComponentProps<'textarea'>['onChange'] = (e) => {
-		setPostValue({
-			...postValue,
-			[e.target.name]: e.target.value,
-		});
-	};
+	const { onAdd, onChangeInput, onChangeTextArea } = useAddPost({
+		isEditingMode,
+		postValue,
+		postId,
+		setPostValue,
+		setValidatePost,
+	});
 
 	useEffect(() => {
 		if (editPostValue) {
@@ -55,22 +47,6 @@ const AddPost = () => {
 			setIsEditingMode(true);
 		}
 	}, []);
-
-	useEffect(() => {
-		if (
-			postValue.area !== 'ALL' &&
-			postValue.category !== 'ALL' &&
-			postValue.content !== '' &&
-			postValue.title !== '' &&
-			postValue.price !== 0
-		) {
-			setValidatePost(true);
-		}
-	}, [postValue]);
-
-	const handleDropdownFilterChange = (value: string, changeTarget: string) => {
-		setPostValue({ ...postValue, [changeTarget]: value });
-	};
 
 	return (
 		<Layout>
@@ -82,14 +58,20 @@ const AddPost = () => {
 				</div>
 				<div>
 					<p>지역</p>
-					<DropDown dropdownTarget="area" options={dropDownTable.AreaOptions} onDropdownChange={handleDropdownFilterChange} />
+					<DropDown<typeof postValue>
+						dropdownTarget="area"
+						options={dropDownTable.AreaOptions}
+						filterObj={postValue}
+						setFilterObj={setPostValue}
+					/>
 				</div>
 				<div>
 					<p>카테고리</p>
-					<DropDown
+					<DropDown<typeof postValue>
 						dropdownTarget="category"
 						options={dropDownTable.CategoryOptions}
-						onDropdownChange={handleDropdownFilterChange}
+						filterObj={postValue}
+						setFilterObj={setPostValue}
 					/>
 				</div>
 				<div>
@@ -105,9 +87,8 @@ const AddPost = () => {
 						const result = window.confirm('등록하시겠습니까?');
 						if (result) {
 							onAdd();
-						} else {
-							navigate(-1);
 						}
+						return;
 					}}
 					disabled={!validatePost}
 				>

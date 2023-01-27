@@ -8,8 +8,8 @@ export const ErrorBoundaryWrap = styled.div`
 	height: calc(100vh - 7rem);
 	p {
 		margin-bottom: 1.5em;
-		font-size: ${({ theme }) => theme.fontSizes.medium};
-		font-weight: ${({ theme }) => theme.fontWeights.bold};
+		font-size: ${({ theme }) => theme.fontSizes.fs16};
+		font-weight: ${({ theme }) => theme.fontWeights.fw800};
 	}
 	button {
 		width: 100px;
@@ -17,8 +17,8 @@ export const ErrorBoundaryWrap = styled.div`
 		border-radius: 12px;
 		border: none;
 		color: ${({ theme }) => theme.colors.white};
-		background-color: ${({ theme }) => theme.colors.primary};
-		font-size: ${({ theme }) => theme.fontSizes.normal};
+		background-color: ${({ theme }) => theme.colors.primary[200]};
+		font-size: ${({ theme }) => theme.fontSizes.fs16};
 		text-decoration: none;
 	}
 `;

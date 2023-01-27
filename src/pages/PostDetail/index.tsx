@@ -1,8 +1,10 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { AiOutlineHome, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
-import { FaCarrot } from 'react-icons/fa';
+import { AiOutlineDelete } from '@react-icons/all-files/ai/AiOutlineDelete';
+import { AiOutlineEdit } from '@react-icons/all-files/ai/AiOutlineEdit';
+import { AiOutlineHome } from '@react-icons/all-files/ai/AiOutlineHome';
+import { FaCarrot } from '@react-icons/all-files/fa/FaCarrot';
 
 import { EmptyHeart, Heart, Iphone } from '@src/assets/image';
 import { Layout } from '@src/components';

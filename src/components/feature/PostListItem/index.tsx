@@ -1,4 +1,4 @@
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart } from '@react-icons/all-files/ai/AiOutlineHeart';
 
 import { Logo } from '@src/assets/image';
 import { PostDetailResponseDto } from '@src/types/api';
