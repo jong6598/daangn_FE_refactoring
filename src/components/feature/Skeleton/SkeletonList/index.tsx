@@ -1,14 +1,14 @@
-import SkeletonPostListItem from './SkeletonListItem';
+import SkeletonListItem from './SkeletonListItem';
 
 const SkeletonList = () => {
 	return (
 		<>
-			<SkeletonPostListItem />
-			<SkeletonPostListItem />
-			<SkeletonPostListItem />
-			<SkeletonPostListItem />
-			<SkeletonPostListItem />
-			<SkeletonPostListItem />
+			<SkeletonListItem />
+			<SkeletonListItem />
+			<SkeletonListItem />
+			<SkeletonListItem />
+			<SkeletonListItem />
+			<SkeletonListItem />
 		</>
 	);
 };
