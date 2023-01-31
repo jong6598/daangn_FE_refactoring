@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
+import BrowserStorage from '@src/services/BrowserStorage';
+
 const createAxiosInstance = () => {
 	const base = axios.create({
 		baseURL: import.meta.env.VITE_BASE_API_URL,
@@ -11,7 +13,8 @@ const createAxiosInstance = () => {
 const axiosInstance = createAxiosInstance();
 
 export default async function requester<Payload>(option: AxiosRequestConfig) {
-	const accessToken = localStorage.getItem('TOKEN') as string;
+	const browserStorage = new BrowserStorage();
+	const accessToken = browserStorage.get('TOKEN');
 	const response: AxiosResponse<Payload> = await axiosInstance(
 		accessToken
 			? {

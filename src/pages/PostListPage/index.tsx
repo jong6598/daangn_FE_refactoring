@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 
 import { FiPlusCircle } from '@react-icons/all-files/fi/FiPlusCircle';
 
-import { Layout, DropDown, SearchInput } from '@src/components';
-import MissingInfoItem from '@src/components/feature/MissingInfoItem';
-import PostList from '@src/components/feature/PostList';
+import { Layout, DropDown, SearchInput, MissingInfoItem, PostList } from '@src/components';
 import { dropDownTable } from '@src/constants/dropDown';
 import ApiErrorBoundary from '@src/errorBoundary/ApiErrorBoundary';
 import ApiErrorPage from '@src/errorBoundary/ApiErrorPage';
+import BrowserStorage from '@src/services/BrowserStorage';
 
 import { PostListPageWrap } from './styled';
 
@@ -18,7 +17,8 @@ const PostListPage = () => {
 		area: 'ALL',
 		category: 'ALL',
 	});
-	const AgreementToMissingInfo = JSON.parse(localStorage.getItem('Agreement') || 'true');
+	const browserStorage = new BrowserStorage();
+	const AgreementToMissingInfo = browserStorage.get('Agreement', 'true');
 
 	return (
 		<Layout>

@@ -9,6 +9,7 @@ import { FaCarrot } from '@react-icons/all-files/fa/FaCarrot';
 import { EmptyHeart, Heart, Iphone } from '@src/assets/image';
 import { Layout } from '@src/components';
 import usePostDetail from '@src/hooks/usePostDetail';
+import BrowserStorage from '@src/services/BrowserStorage';
 import { numberWithCommasConverter } from '@src/utils/numberUtils';
 
 import { PostDetailWrap } from './styled';
@@ -16,7 +17,8 @@ import { PostDetailWrap } from './styled';
 const PostDetail = () => {
 	const navigate = useNavigate();
 	const params = useParams();
-	const loginUserName = JSON.parse(localStorage.getItem('userInfo')!).username;
+	const browserStorage = new BrowserStorage();
+	const loginUserName = browserStorage.get('userInfo').username;
 	const { postInfo, onToggleLike, onDelete } = usePostDetail(params.postId!);
 
 	return (

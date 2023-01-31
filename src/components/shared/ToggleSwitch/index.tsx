@@ -1,5 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 
+import BrowserStorage from '@src/services/BrowserStorage';
+
 import { ToggleSwitchWrap, SwitchWrap } from './styled';
 
 type Props = {
@@ -8,14 +10,15 @@ type Props = {
 };
 
 const ToggleSwitch = ({ storageKey, switchLabel }: Props) => {
-	const [switchState, setSwitchState] = useState(JSON.parse(localStorage.getItem('Agreement') || 'true'));
+	const browserStorage = new BrowserStorage();
+	const [switchState, setSwitchState] = useState(browserStorage.get(storageKey, 'true'));
 
 	const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setSwitchState(!switchState);
 	};
 
 	useEffect(() => {
-		localStorage.setItem(storageKey, JSON.stringify(switchState));
+		browserStorage.set(storageKey, switchState);
 	}, [switchState]);
 
 	return (
