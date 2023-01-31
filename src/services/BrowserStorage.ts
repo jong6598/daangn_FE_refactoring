@@ -1,6 +1,13 @@
 import { browserStorage } from '@src/constants/browserStorage';
 
-class BrowserStorage {
+interface IBrowserStorage {
+	set(key: string, value: any): void;
+	get(key: string, defaultValue?: any): void;
+	remove(key: string): void;
+	clear(): void;
+}
+
+class BrowserStorage implements IBrowserStorage {
 	browserStorage: Storage;
 
 	constructor() {
