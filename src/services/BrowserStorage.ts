@@ -1,13 +1,13 @@
 import { browserStorage } from '@src/constants/browserStorage';
 
-interface IBrowserStorage {
+interface BrowserStorage {
 	set(key: string, value: any): void;
 	get(key: string, defaultValue?: any): void;
 	remove(key: string): void;
 	clear(): void;
 }
 
-class BrowserStorage implements IBrowserStorage {
+class UseBrowserStorage implements BrowserStorage {
 	browserStorage: Storage;
 
 	constructor() {
@@ -31,4 +31,4 @@ class BrowserStorage implements IBrowserStorage {
 	}
 }
 
-export default BrowserStorage;
+export default UseBrowserStorage;

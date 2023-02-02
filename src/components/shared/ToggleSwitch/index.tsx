@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 
-import BrowserStorage from '@src/services/BrowserStorage';
+import UseBrowserStorage from '@src/services/BrowserStorage';
 
 import { ToggleSwitchWrap, SwitchWrap } from './styled';
 
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const ToggleSwitch = ({ storageKey, switchLabel }: Props) => {
-	const browserStorage = new BrowserStorage();
+	const browserStorage = new UseBrowserStorage();
 	const [switchState, setSwitchState] = useState(browserStorage.get(storageKey, 'true'));
 
 	const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {

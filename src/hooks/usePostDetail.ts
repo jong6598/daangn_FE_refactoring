@@ -4,13 +4,13 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { queryKeys } from '@src/constants/queryKeys';
 import { getPostDetail, likePost, unlikePost, deletePost } from '@src/core/apis/post';
-import BrowserStorage from '@src/services/BrowserStorage';
+import UseBrowserStorage from '@src/services/BrowserStorage';
 import { PostDetailData } from '@src/types/api';
 
 const usePostDetail = (postId: string) => {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
-	const browserStorage = new BrowserStorage();
+	const browserStorage = new UseBrowserStorage();
 	const accessToken = browserStorage.get('TOKEN');
 	const loginUserName = browserStorage.get('userInfo').username;
 

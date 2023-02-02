@@ -7,7 +7,7 @@ import { Layout, DropDown, SearchInput, MissingInfoItem, PostList } from '@src/c
 import { dropDownTable } from '@src/constants/dropDown';
 import ApiErrorBoundary from '@src/errorBoundary/ApiErrorBoundary';
 import ApiErrorPage from '@src/errorBoundary/ApiErrorPage';
-import BrowserStorage from '@src/services/BrowserStorage';
+import UseBrowserStorage from '@src/services/BrowserStorage';
 
 import { PostListPageWrap } from './styled';
 
@@ -17,7 +17,7 @@ const PostListPage = () => {
 		area: 'ALL',
 		category: 'ALL',
 	});
-	const browserStorage = new BrowserStorage();
+	const browserStorage = new UseBrowserStorage();
 	const AgreementToMissingInfo = browserStorage.get('Agreement', 'true');
 
 	return (

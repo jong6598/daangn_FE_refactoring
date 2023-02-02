@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { Logo } from '@src/assets/image';
 import { signin } from '@src/core/apis/auth';
 import useForm from '@src/hooks/useForm';
-import BrowserStorage from '@src/services/BrowserStorage';
+import UseBrowserStorage from '@src/services/BrowserStorage';
 import validateSign from '@src/utils/validateSign';
 
 import { SignInWrap, Error } from './styled';
 
 const SignIn = () => {
 	const navigate = useNavigate();
-	const browserStorage = new BrowserStorage();
+	const browserStorage = new UseBrowserStorage();
 	const { values, errors, handleChange, handleSubmit } = useForm({
 		initialValues: { username: '', password: '' },
 		onSubmit: async (values: object) => {

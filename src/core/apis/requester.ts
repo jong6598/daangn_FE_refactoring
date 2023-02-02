@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import BrowserStorage from '@src/services/BrowserStorage';
+import UseBrowserStorage from '@src/services/BrowserStorage';
 
 const createAxiosInstance = () => {
 	const base = axios.create({
@@ -13,7 +13,7 @@ const createAxiosInstance = () => {
 const axiosInstance = createAxiosInstance();
 
 export default async function requester<Payload>(option: AxiosRequestConfig) {
-	const browserStorage = new BrowserStorage();
+	const browserStorage = new UseBrowserStorage();
 	const accessToken = browserStorage.get('TOKEN');
 	const response: AxiosResponse<Payload> = await axiosInstance(
 		accessToken

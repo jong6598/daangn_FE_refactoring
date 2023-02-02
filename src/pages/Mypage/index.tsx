@@ -9,14 +9,14 @@ import { Layout, MypageList, ToggleSwitch } from '@src/components';
 import { logout } from '@src/core/apis/auth';
 import ApiErrorBoundary from '@src/errorBoundary/ApiErrorBoundary';
 import ApiErrorPage from '@src/errorBoundary/ApiErrorPage';
-import BrowserStorage from '@src/services/BrowserStorage';
+import UseBrowserStorage from '@src/services/BrowserStorage';
 
 import { MypageWrap } from './styled';
 
 const Mypage = () => {
 	const [filter, setFilter] = useState('sale');
 	const navigate = useNavigate();
-	const browserStorage = new BrowserStorage();
+	const browserStorage = new UseBrowserStorage();
 	const nickName = browserStorage.get('userInfo').nickname;
 
 	const handleLogout = async () => {

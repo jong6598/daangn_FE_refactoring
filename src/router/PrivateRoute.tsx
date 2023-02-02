@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
 import { PRIVATE_ROUTE_PATH, PUBLIC_ROUTE_PATH } from '@src/router/routePath';
-import BrowserStorage from '@src/services/BrowserStorage';
+import UseBrowserStorage from '@src/services/BrowserStorage';
 
 interface PrivateRouteProps {
 	children?: ReactElement;
@@ -10,7 +10,7 @@ interface PrivateRouteProps {
 }
 
 const PrivateRoute = ({ authentication }: PrivateRouteProps): React.ReactElement | null => {
-	const browserStorage = new BrowserStorage();
+	const browserStorage = new UseBrowserStorage();
 	const isAuthenticated = browserStorage.get('TOKEN');
 
 	if (authentication) {
