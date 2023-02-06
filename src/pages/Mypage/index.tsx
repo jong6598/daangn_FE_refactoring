@@ -5,23 +5,23 @@ import { AiFillHeart } from '@react-icons/all-files/ai/AiFillHeart';
 import { FaCarrot } from '@react-icons/all-files/fa/FaCarrot';
 import { IoIosPaper } from '@react-icons/all-files/io/IoIosPaper';
 
-import { Layout } from '@src/components';
-import MypageList from '@src/components/feature/MypageList';
-import ToggleSwitch from '@src/components/shared/ToggleSwitch';
+import { Layout, MypageList, ToggleSwitch } from '@src/components';
 import { logout } from '@src/core/apis/auth';
 import ApiErrorBoundary from '@src/errorBoundary/ApiErrorBoundary';
 import ApiErrorPage from '@src/errorBoundary/ApiErrorPage';
+import UseBrowserStorage from '@src/services/BrowserStorage';
 
 import { MypageWrap } from './styled';
 
 const Mypage = () => {
 	const [filter, setFilter] = useState('sale');
 	const navigate = useNavigate();
-	const nickName = JSON.parse(localStorage.getItem('userInfo')!).nickname;
+	const browserStorage = new UseBrowserStorage();
+	const nickName = browserStorage.get('userInfo').nickname;
 
 	const handleLogout = async () => {
 		await logout;
-		localStorage.clear();
+		browserStorage.clear();
 		alert('로그아웃 되었습니다.');
 		navigate('/');
 	};

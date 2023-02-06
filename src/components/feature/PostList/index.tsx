@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { useInView } from 'react-intersection-observer';
 
-import PostListItem from '@src/components/feature/PostListItem';
+import { NoData, PostListItem } from '@src/components';
 import SkeletonList from '@src/components/feature/Skeleton/SkeletonList';
-import NoData from '@src/components/shared/NoData';
 import usePostList from '@src/hooks/usePostList';
 import { PostDetailData } from '@src/types/api';
 
@@ -28,8 +27,6 @@ const PostList = ({ postFilterObj, searchKeyword, AgreementToMissingInfo }: Prop
 			fetchNextPage();
 		}
 	}, [inView]);
-
-	console.log(typeof postListData?.pages[0].data.length);
 
 	return (
 		<PostListWrap AgreementToMissingInfo={AgreementToMissingInfo}>
