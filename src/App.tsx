@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import Loader from '@src/components/shared/Loader';
+import { Loader } from '@src/components';
 import GlobalErrorBoundary from '@src/errorBoundary/ErrorBoundary';
 import GlobalErrorPage from '@src/errorBoundary/GlobalErrorPage';
 import Router from '@src/router/index';

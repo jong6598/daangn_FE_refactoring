@@ -5,15 +5,11 @@ type Props = {
 };
 
 const SearchInput = (props: Props) => {
-	const searchInputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-
-	const handleSearchByKeyword = (keyword: string) => {
-		props.setSearchKeyword(keyword);
-	};
+	const searchInputRef = useRef<HTMLInputElement>(null);
 
 	const handleSearchFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		handleSearchByKeyword(searchInputRef?.current?.value);
+		props.setSearchKeyword(searchInputRef?.current?.value!);
 	};
 
 	return (
