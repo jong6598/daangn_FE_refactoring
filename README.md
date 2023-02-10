@@ -317,6 +317,72 @@ export default ApiErrorBoundary;
 </details>
 
 <br />
+	
+<details>
+<summary> browserStorage module 을 이용한 storage 사용 [https://github.com/jong6598/daangn_FE_refactoring/pull/21]</summary>
+	
+### 구현 방법
+  
+> 💫 browserStorage module class
+	
+```tsx
+import { browserStorage } from '@src/constants/browserStorage';
+
+interface BrowserStorage {
+	set(key: string, value: any): void;
+	get(key: string, defaultValue?: any): void;
+	remove(key: string): void;
+	clear(): void;
+}
+
+class UseBrowserStorage implements BrowserStorage {
+	browserStorage: Storage;
+
+	constructor() {
+		this.browserStorage = browserStorage;
+	}
+
+	set(key: string, value: any) {
+		this.browserStorage.setItem(key, JSON.stringify(value));
+	}
+
+	get(key: string, defaultValue?: any) {
+		const serializedValue = this.browserStorage.getItem(key);
+		return serializedValue ? JSON.parse(serializedValue) : defaultValue;
+	}
+
+	remove(key: string) {
+		this.browserStorage.removeItem(key);
+	}
+	clear() {
+		this.browserStorage.clear();
+	}
+}
+
+export default UseBrowserStorage;
+```
+
++ 변경 전 사용부
+
+```tsx
+const [switchState, setSwitchState] = useState(JSON.parse(localStorage.getItem('Agreement') || 'true'));
+```
+
++ 변경 후 사용부
+
+```tsx
+const browserStorage = new BrowserStorage();
+const [switchState, setSwitchState] = useState(browserStorage.get(storageKey, 'true'));
+	
+```
++ 사용부에서 storage에 저장하거나 저장한 데이터를 사용할때, 형변환을 직접한다면 저장할때와 꺼내와 사용할때 상태가 보장이 안 될 수 있습니다. 특히 사용부가 많을수록 동일한 사용이 보장되지 않을 수 있다는 생각을 했습니다. 공통적인 로직이 적용된 browserStorage 모듈을 생성하고 사용하는 방식을 통해 공통된 방식으로 저장하고 사용함으로써, 스토리지 사용에 대한 안정성을 높였습니다.
++ 스토리지의 종류는 의존성 주입을 통해, 외부의 constant 폴더의 browserStorage.ts에서 설정하는 방식을 통해 한번에 관리할 수 있도록 설계하였습니다.
+
+
+</details>
+	
+<br />	
+	
 
 <details>
 <summary>비즈니스 부분 개선사항: 실종정보 컴포넌트 추가</summary>
@@ -378,9 +444,6 @@ export default ToggleSwitch;
 <br />
 
 	
-  	
-	
-
 ## 배포 링크
  - http://daangnvite.s3-website.ap-northeast-2.amazonaws.com/
 
