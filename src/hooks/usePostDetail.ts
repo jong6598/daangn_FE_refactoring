@@ -3,16 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { queryKeys } from '@src/constants/queryKeys';
+import { storage } from '@src/constants/storage';
 import { getPostDetail, likePost, unlikePost, deletePost } from '@src/core/apis/post';
-import UseBrowserStorage from '@src/services/BrowserStorage';
+import { UserInfoType } from '@src/pages/SignIn';
+import BrowserStorageModule from '@src/services/BrowserStorageModule';
 import { PostDetailData } from '@src/types/api';
 
 const usePostDetail = (postId: string) => {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
-	const browserStorage = new UseBrowserStorage();
+	const browserStorage = new BrowserStorageModule(storage);
 	const accessToken = browserStorage.get('TOKEN');
-	const loginUserName = browserStorage.get('userInfo').username;
+	const loginUserName = browserStorage.get<UserInfoType>('userInfo')!.username;
 
 	const extractPostDetail = async () => {
 		const res = await getPostDetail(postId);

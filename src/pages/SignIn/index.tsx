@@ -1,16 +1,23 @@
 import { useNavigate } from 'react-router-dom';
 
 import { Logo } from '@src/assets/image';
+import { storage } from '@src/constants/storage';
 import { signin } from '@src/core/apis/auth';
 import useForm from '@src/hooks/useForm';
-import UseBrowserStorage from '@src/services/BrowserStorage';
+import BrowserStorageModule from '@src/services/BrowserStorageModule';
 import validateSign from '@src/utils/validateSign';
 
 import { SignInWrap, Error } from './styled';
 
+export type UserInfoType = {
+	userId: number;
+	username: string;
+	nickname: string;
+};
+
 const SignIn = () => {
 	const navigate = useNavigate();
-	const browserStorage = new UseBrowserStorage();
+	const browserStorage = new BrowserStorageModule(storage);
 	const { values, errors, handleChange, handleSubmit } = useForm({
 		initialValues: { username: '', password: '' },
 		onSubmit: async (values: object) => {

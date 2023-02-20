@@ -5,9 +5,10 @@ import { FiPlusCircle } from '@react-icons/all-files/fi/FiPlusCircle';
 
 import { Layout, DropDown, SearchInput, MissingInfoItem, PostList } from '@src/components';
 import { dropDownTable } from '@src/constants/dropDown';
+import { storage } from '@src/constants/storage';
 import ApiErrorBoundary from '@src/errorBoundary/ApiErrorBoundary';
 import ApiErrorPage from '@src/errorBoundary/ApiErrorPage';
-import UseBrowserStorage from '@src/services/BrowserStorage';
+import BrowserStorageModule from '@src/services/BrowserStorageModule';
 
 import { PostListPageWrap } from './styled';
 
@@ -17,8 +18,8 @@ const PostListPage = () => {
 		area: 'ALL',
 		category: 'ALL',
 	});
-	const browserStorage = new UseBrowserStorage();
-	const AgreementToMissingInfo = browserStorage.get('Agreement', 'true');
+	const browserStorage = new BrowserStorageModule(storage);
+	const AgreementToMissingInfo = browserStorage.get<boolean>('Agreement', true);
 
 	return (
 		<Layout>
@@ -42,7 +43,11 @@ const PostListPage = () => {
 				</div>
 				<ApiErrorBoundary fallback={ApiErrorPage}>
 					{AgreementToMissingInfo && <MissingInfoItem />}
-					<PostList postFilterObj={postFilterObj} searchKeyword={searchKeyword} AgreementToMissingInfo={AgreementToMissingInfo} />
+					<PostList
+						postFilterObj={postFilterObj}
+						searchKeyword={searchKeyword}
+						AgreementToMissingInfo={AgreementToMissingInfo!}
+					/>
 					<div className="postAddDiv">
 						<Link to="/addpost">
 							<FiPlusCircle />
