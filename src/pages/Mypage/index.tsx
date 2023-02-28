@@ -6,18 +6,20 @@ import { FaCarrot } from '@react-icons/all-files/fa/FaCarrot';
 import { IoIosPaper } from '@react-icons/all-files/io/IoIosPaper';
 
 import { Layout, MypageList, ToggleSwitch } from '@src/components';
+import { storage } from '@src/constants/storage';
 import { logout } from '@src/core/apis/auth';
 import ApiErrorBoundary from '@src/errorBoundary/ApiErrorBoundary';
 import ApiErrorPage from '@src/errorBoundary/ApiErrorPage';
-import UseBrowserStorage from '@src/services/BrowserStorage';
+import { UserInfoType } from '@src/pages/SignIn';
+import BrowserStorageModule from '@src/services/BrowserStorageModule';
 
 import { MypageWrap } from './styled';
 
 const Mypage = () => {
 	const [filter, setFilter] = useState('sale');
 	const navigate = useNavigate();
-	const browserStorage = new UseBrowserStorage();
-	const nickName = browserStorage.get('userInfo').nickname;
+	const browserStorage = new BrowserStorageModule(storage);
+	const nickName = browserStorage.get<UserInfoType>('userInfo')!.nickname;
 
 	const handleLogout = async () => {
 		await logout;
