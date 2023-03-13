@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useInView } from 'react-intersection-observer';
@@ -19,28 +19,14 @@ type Props = {
 const PostList = ({ postFilterObj, searchKeyword, AgreementToMissingInfo }: Props) => {
 	const { ref, inView } = useInView();
 	const navigate = useNavigate();
-	const [showSkeleton, setShowSkeleton] = useState(false);
 
 	const { postListData, fetchNextPage, isFetchingNextPage, hasNextPage } = usePostList(postFilterObj, searchKeyword);
 
 	useEffect(() => {
-		const fetchNextPageAndShowSkeleton = async () => {
-			if (inView && hasNextPage) {
-				const timerId = setTimeout(() => {
-					setShowSkeleton(true);
-					console.log('변경');
-				}, 200);
-				await fetchNextPage();
-				clearTimeout(timerId);
-				setShowSkeleton(false);
-			}
-		};
-		fetchNextPageAndShowSkeleton();
-
-		return () => {
-			setShowSkeleton(false);
-		};
-	}, [inView, hasNextPage, fetchNextPage]);
+		if (inView && hasNextPage) {
+			fetchNextPage();
+		}
+	}, [inView]);
 
 	return (
 		<PostListWrap AgreementToMissingInfo={AgreementToMissingInfo}>
@@ -64,7 +50,7 @@ const PostList = ({ postFilterObj, searchKeyword, AgreementToMissingInfo }: Prop
 					</React.Fragment>
 				);
 			})}
-			{isFetchingNextPage ? showSkeleton ? <SkeletonList /> : null : <div className="inviewDiv" ref={ref} />}
+			{isFetchingNextPage ? <SkeletonList /> : <div className="inviewDiv" ref={ref} />}
 		</PostListWrap>
 	);
 };
