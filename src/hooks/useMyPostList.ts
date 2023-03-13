@@ -17,6 +17,7 @@ const useMyPostList = (filter: string) => {
 		isFetchingNextPage,
 	} = useInfiniteQuery([queryKeys.myPostList, filter], ({ pageParam = 0 }) => getMyPostList(pageParam), {
 		getNextPageParam: (myPostListData) => (!myPostListData.last ? myPostListData.nextPage : undefined),
+		suspense: true,
 	});
 
 	return { myPostListData, fetchNextPage, isFetchingNextPage };
