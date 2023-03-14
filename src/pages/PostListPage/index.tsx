@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { FiPlusCircle } from '@react-icons/all-files/fi/FiPlusCircle';
 
 import { Layout, DropDown, SearchInput, MissingInfoItem, PostList } from '@src/components';
+import SkeletonList from '@src/components/feature/Skeleton/SkeletonList';
 import { dropDownTable } from '@src/constants/dropDown';
 import { storage } from '@src/constants/storage';
 import ApiErrorBoundary from '@src/errorBoundary/ApiErrorBoundary';
@@ -43,11 +44,13 @@ const PostListPage = () => {
 				</div>
 				<ApiErrorBoundary fallback={ApiErrorPage}>
 					{AgreementToMissingInfo && <MissingInfoItem />}
-					<PostList
-						postFilterObj={postFilterObj}
-						searchKeyword={searchKeyword}
-						AgreementToMissingInfo={AgreementToMissingInfo!}
-					/>
+					<Suspense fallback={<SkeletonList />}>
+						<PostList
+							postFilterObj={postFilterObj}
+							searchKeyword={searchKeyword}
+							AgreementToMissingInfo={AgreementToMissingInfo!}
+						/>
+					</Suspense>
 					<div className="postAddDiv">
 						<Link to="/addpost">
 							<FiPlusCircle />

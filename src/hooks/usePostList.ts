@@ -33,6 +33,7 @@ const usePostList = (postFilterObj: Props, searchKeyword: string) => {
 		({ pageParam = 0 }) => getPosts(pageParam),
 		{
 			getNextPageParam: (postListData) => (!postListData.last ? postListData.nextPage : undefined),
+			suspense: true,
 		},
 	);
 

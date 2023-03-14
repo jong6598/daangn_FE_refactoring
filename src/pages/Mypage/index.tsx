@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AiFillHeart } from '@react-icons/all-files/ai/AiFillHeart';
@@ -6,6 +6,7 @@ import { FaCarrot } from '@react-icons/all-files/fa/FaCarrot';
 import { IoIosPaper } from '@react-icons/all-files/io/IoIosPaper';
 
 import { Layout, MypageList, ToggleSwitch } from '@src/components';
+import SkeletonList from '@src/components/feature/Skeleton/SkeletonList';
 import { storage } from '@src/constants/storage';
 import { logout } from '@src/core/apis/auth';
 import ApiErrorBoundary from '@src/errorBoundary/ApiErrorBoundary';
@@ -57,7 +58,9 @@ const Mypage = () => {
 					</button>
 				</div>
 				<ApiErrorBoundary fallback={ApiErrorPage}>
-					<MypageList filter={filter} />
+					<Suspense fallback={<SkeletonList />}>
+						<MypageList filter={filter} />
+					</Suspense>
 				</ApiErrorBoundary>
 			</MypageWrap>
 		</Layout>

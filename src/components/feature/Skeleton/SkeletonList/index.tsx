@@ -1,3 +1,5 @@
+import DeferredComponent from '@src/components/hoc/DeferredComponent';
+
 import SkeletonListItem from './SkeletonListItem';
 
 const SkeletonList = () => {
@@ -13,4 +15,4 @@ const SkeletonList = () => {
 	);
 };
 
-export default SkeletonList;
+export default DeferredComponent(SkeletonList);
