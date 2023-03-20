@@ -13,129 +13,9 @@
 
 ## 데모 & 구현 방법
 
-<details>
-<summary>React-hook-form을 사용한 로그인, 회원가입 구현방식에서  useForm의 기능을 커스텀훅으로 자체구현해서 사용 [https://github.com/jong6598/daangn_FE_refactoring/pull/7]</summary>
-
-### 결과물
-
-`로그인 화면`
-
-<img width="425" alt="스크린샷 2022-12-18 오전 4 09 25" src="https://user-images.githubusercontent.com/108744804/208259748-58165a1b-0915-4432-aad9-c1e4879df46a.png">
-
-`회원가입 화면`
-
-<img width="405" alt="스크린샷 2022-12-18 오전 4 09 03" src="https://user-images.githubusercontent.com/108744804/208259854-459bb57c-7b8d-4c56-a82d-a5beb950018f.png">
-
-
 
 ### 구현방법
 
-`useForm의 커스텀훅 구현`
-
-- 로그인과 회원가입시 input의 value를 받는 values state와 error 상태를 보여주는 error state를 사용하여 로그인 회원가입에 사용하던 React-hook-form 대체
-
-`useForm hook`
-```ts
-const useForm = ({ initialValues, onSubmit, validateSign }: Props) => {
-	const [values, setValues] = useState(initialValues);
-	const [errors, setErrors] = useState({ username: '', password: '', nickname: '', confirmPassword: '' });
-
-	const handleChange: ComponentProps<'input'>['onChange'] = (e) => {
-		const { name, value } = e.target;
-		setValues({ ...values, [name]: value });
-		setErrors(validateSign(values));
-	};
-
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		setErrors(validateSign(values));
-		e.preventDefault();
-		if (errors.username === '' && errors.password === '') {
-			onSubmit(values);
-			setValues(initialValues);
-		} else {
-			alert('빈칸을 채워주세요');
-		}
-	};
-
-	return {
-		values,
-		errors,
-		handleChange,
-		handleSubmit,
-	};
-};
-```
-
-`validation 유틸 함수`
-
-```tsx
-type Props = {
-	username: string;
-	password: string;
-	nickname?: string;
-	confirmPassword?: string;
-};
-
-const validateSign = ({ username, password, nickname, confirmPassword }: Props) => {
-	const errors = {
-		username: '',
-		password: '',
-		nickname: '',
-		confirmPassword: '',
-	};
-
-	if (username === '') {
-		errors.username = '아이디가 입력되지 않았습니다.';
-	} else if (username.length < 3) {
-		errors.username = '4자 이상의 아이디를 사용해주세요.';
-	}
-
-	if (password === '') {
-		errors.password = '비밀번호가 입력되지 않았습니다.';
-	} else if (password.length <= 4) {
-		errors.password = '6자 이상의 패스워드를 사용해주세요.';
-	}
-
-	if (nickname === '') {
-		errors.nickname = '닉네임이 입력되지 않았습니다.';
-	} else if (nickname !== undefined && nickname.length > 10) {
-		errors.nickname = '10자 이하의 닉네임을 사용해주세요.';
-	}
-
-	if (confirmPassword === '') {
-		errors.confirmPassword = '비밀번호를 확인해주세요.';
-	} else if (confirmPassword !== password) {
-		errors.confirmPassword = '비밀번호가 일치하지 않습니다.';
-	}
-
-	return errors;
-};
-
-export default validateSign;
-```
-
-`=> input 입력시 마다 validation을 실행하고 이를 기반으로 에러 메세지 출력`
-
-`hook 사용부`
-
-```tsx
-const { values, errors, handleChange, handleSubmit } = useForm({
-		initialValues: { username: '', password: '' },
-		onSubmit: async (values: object) => {
-			const payload = await signin(values);
-			localStorage.setItem('TOKEN', payload.token);
-			localStorage.setItem(
-				'userInfo',
-				JSON.stringify({ userId: payload.userId, username: payload.username, nickname: payload.username }),
-			);
-			navigate('/home');
-		},
-		validateSign,
-	});
-```
-</details>
-
-<br />
 
 <details>
 <summary>재사용을 고려하지 않은 컴포넌트 중복 작성 방식에서, 컴포넌트 재사용을 고려하여 드롭다운 · 검색창 등 공통 컴포넌트 구현 [https://github.com/jong6598/daangn_FE_refactoring/pull/8]</summary>
@@ -491,7 +371,7 @@ https://www.youtube.com/watch?v=buMKHvXKEAY
 
 ## 프로젝트 진행사항
 
-### 구현현
+### 구현현황
 
 - 로그인 & 회원가입 페이지
     - 기본구현 사항
@@ -552,7 +432,7 @@ https://www.youtube.com/watch?v=buMKHvXKEAY
 ## 추가 테스크
 
 
-1.  - [x] errorBoundary & suspense 설정을 통한 error, loding 상태 핸들링 => https://github.com/jong6598/daangn_FE_refactoring/pull/17
+1. - [x] errorBoundary & suspense 설정을 통한 error, loding 상태 핸들링 => https://github.com/jong6598/daangn_FE_refactoring/pull/17
 
 	
 2. - [x] import 순서, css 순서 컨벤션 따라 정리 & 절대경로 설정 => https://github.com/jong6598/daangn_FE_refactoring/pull/14
